@@ -1,0 +1,54 @@
+mat-sidenav-container,mat-sidenav, mat-sidenav-content {
+  background: none;
+  height: 100%;
+}
+mat-sidenav {
+  width: 350px;
+  padding: 18px;
+  height: 100vh;
+  position: fixed;
+  right: 0;
+  background: white;
+}
+::ng-deep .mat-drawer-backdrop {
+  background-color: transparent !important;
+  transition: none !important;
+}
+
+mat-sidenav-content {
+  background: none;
+  min-height: 100vh;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  padding: 0 30px;
+}
+mat-sidenav ul {
+  width: 100%;
+}
+mat-sidenav ul li {
+  padding: 10px 8px;
+  border-radius: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  gap: 20px;
+}
+mat-sidenav ul li mat-icon {
+  color: #5199c9;
+}
+ul li {
+  cursor: pointer;
+}
+ul li:hover {
+  transition: .2s;
+  background-color: aliceblue;
+}
+main {
+  width: 100%;
+  height: 100%;
+}

@@ -1,0 +1,272 @@
+#letsGoBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 30px;
+  border: 1px solid rgba(108, 72, 255, 0.263);
+  position: relative;
+  overflow: hidden;
+  border-radius: 10rem;
+  transition: all 0.02s;
+  font-weight: bold;
+  font-size: 18px;
+  cursor: pointer;
+  color: rgb(26, 26, 26);
+  z-index: 0;
+  box-shadow: 0 1px 10px 0px rgba(0, 0, 0, 0.2);
+}
+#letsGoBtn:hover {
+  background: rgb(193, 228, 248);
+  color: rgb(33, 0, 85);
+}
+#letsGoBtn:active {
+  transform: scale(0.97);
+}
+.hoverEffect {
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+.hoverEffect div {
+  background: rgb(222, 0, 75);
+  background: linear-gradient(
+    90deg,
+    rgb(224, 7, 79) 0%,
+    rgb(192, 76, 255) 49%,
+    rgba(0, 212, 255, 1) 100%
+  );
+  border-radius: 40rem;
+  width: 10rem;
+  height: 10rem;
+  transition: 0.4s;
+  filter: blur(20px);
+  animation: effect infinite 3s linear;
+  opacity: 0.5;
+}
+#letsGoBtn:hover .hoverEffect div {
+  width: 8rem;
+  height: 8rem;
+}
+@keyframes effect {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+#websiteFeatures mat-card {
+  display: flex;
+  height: 230px;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center ;
+  background: none;
+  box-shadow:none;
+}
+#websiteFeatures mat-card div {
+  width: 100%;
+  height: 80%;
+  max-height: 80%;
+  display: flex ;
+  justify-content: center;
+  align-items: center;
+}
+#websiteFeatures img {
+  object-fit: contain;
+  max-width: 100%;
+  max-height: 90%;
+}
+#websiteFeatures mat-card mat-card-content {
+  height: 20%;
+}
+#websiteFeatures mat-card p {
+  text-align: center;
+  font-size: 15px;
+  font-weight: 600;
+  color: #320a6bcf;
+}
+
+
+/* Plans Section */
+
+#plansSection mat-card {
+  height: 100%;
+  border-radius: 20px;
+  background-color: transparent;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.199);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  gap: 20px;
+}
+#plansSection mat-card-title,
+#plansSection mat-card-subtitle,
+#plansSection mat-card-header {
+  width: 100%;
+  text-align: right;
+  font-family: "IRANSANSdn";
+}
+#plansSection mat-card-title {
+  font-size: 15px;
+  font-weight: bold;
+}
+#plansSection mat-card-subtitle {
+  font-size: 13px;
+}
+#plansSection mat-card-content {
+  height: max-content;
+}
+#plansSection mat-card button {
+  position: absolute;
+  bottom: 20px; left: 20px;
+  border-radius: 100%;
+  background-color: #ffffff;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.343);
+  color: #065084;
+}
+#plansSection ul {
+  width: 100%;
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  gap: 5px;
+}
+#plansSection ul li {
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  font-size: 12px;
+}
+#plansSection ul li::before {
+  content: "";
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url("../../assets/vectors/icons8-tick-box.svg");
+  background-size: contain;
+  width: 20px; height: 20px;
+  margin-left: 4px;
+}
+
+/* Exercises Section */
+
+#exercisesSection mat-card {
+  width: 80%;
+  height: 255px;
+  gap: 10px;
+  padding: 14px;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 20px;
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.199);
+}
+#exercisesSection mat-card img {
+  width: 50%;
+  height: 100%;
+  background-color: #d0eaff5b;
+  border-radius: 16px;
+  object-fit: contain;
+}
+#exercisesSection mat-card-title {
+  width: 100%;
+  text-align: right;
+  font-family: "IRANSANSdn";
+  font-size: 18px;
+  font-weight: bold;
+  color: #320A6B;
+}
+#exercisesSection mat-card-subtitle {
+  font-family: "IRANSANSdn";
+  width: 100%;
+  text-align: right;
+}
+#exercisesSection mat-card-content {
+  width: 50%;
+  height: 100%;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: start;
+}
+#exercisesSection mat-card ul {
+  width: 100%;
+  height: fit-content;
+  padding: 5px 0;
+  display: flex; flex-direction: column;
+  justify-content: start; align-items: start;
+  row-gap: 4px;
+}
+#exercisesSection mat-card ul li {
+  padding: 0;
+  font-size: 13px;
+  text-align: right;
+  background: none; box-shadow: none;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+}
+#exercisesSection mat-card ul li span {
+  font-weight: bold;
+  display: inline-block;
+  margin-left: 6px;
+}
+#exercisesSection mat-card ul li::before {
+  content: "";
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url("../../assets/vectors/danger-circle.svg");
+  background-size: contain;
+  width: 18px; height: 18px;
+  margin-left: 4px;
+}
+#exercisesSection mat-card button {
+  background-color: #065084;
+  border-radius: 12px;
+  color: white;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.294);
+  display: flex; justify-content: center; align-items: center;
+}
+#exercisesSection mat-card button mat-icon {
+  border-radius: 10px;
+}
+
+#exercisesSection mat-tab {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#exercisesSection #mat-tab-wrapper {
+  height: fit-content;
+  padding: 20px 10px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+#mat-tab-wrapper mat-card-subtitle.hard span {
+  color: rgb(255, 75, 75);
+}
+#mat-tab-wrapper mat-card-subtitle.normal span {
+  color: rgb(75, 75, 255);
+}
+#mat-tab-wrapper mat-card-subtitle.easy span {
+  color: rgb(65, 154, 65);
+}

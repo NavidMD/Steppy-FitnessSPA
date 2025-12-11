@@ -1,0 +1,237 @@
+#infoSideCard mat-card {
+  width: 100%;
+  height: 100%;
+  gap: 15px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 20px;
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.199);
+}
+#infoSideCard mat-card img {
+  width: 100%;
+  object-fit: contain;
+  height: 200px;
+  background-color: #d0eaff5b;
+  border-radius: 16px;
+}
+#infoSideCard mat-card-content {
+  width: 100%;
+  height: 50%;
+  padding: 10px;
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: start;
+}
+#infoSideCard mat-card-title {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 22px;
+  font-weight: bold;
+  color: #320a6b;
+  font-family: "IRANSANSdn";
+  margin-bottom: 10px;
+}
+#infoSideCard #level {
+  display: block;
+  font-weight: 400;
+  font-size: 15px;
+  padding: 0px 15px;
+  color: white;
+}
+#infoSideCard #level.hard {
+  background-color: rgba(255, 75, 75, 0.7);
+}
+#infoSideCard #level.normal {
+  background-color: rgb(75, 75, 255, 0.7);
+}
+#infoSideCard #level.easy {
+  background-color: rgb(65, 154, 65, 0.7);
+}
+#infoSideCard mat-card ul li {
+  padding: 0;
+  font-size: 15px;
+  text-align: right;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+}
+#infoSideCard mat-card ul li span {
+  display: inline-block;
+  margin-right: auto;
+  margin-left: 0;
+  color: #065084;
+}
+#infoSideCard mat-card ul li::before,
+#exerciseInfo a::before {
+  content: "";
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 21px;
+  height: 22px;
+  margin-left: 6px;
+}
+#exerciseInfo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#exerciseInfo a::before {
+  background-image: url("../../assets/vectors/info.svg");
+}
+mat-card ul #muscleTarget::before {
+  background-image: url("../../assets/vectors/target.svg");
+}
+mat-card ul #muscleWeakness::before {
+  background-image: url("../../assets/vectors/warning.svg");
+}
+mat-card ul #setCounts::before {
+  background-image: url("../../assets/vectors/calculator.svg");
+}
+mat-card ul #repCounts::before {
+  background-image: url("../../assets/vectors/countdown.svg");
+}
+#repCounts span,
+#setCounts span {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+#exerciseControls mat-stepper {
+  background-color: transparent;
+  width: 100%;
+  height: 100%;
+}
+
+::ng-deep .mat-horizontal-stepper-content {
+  width: 100%;
+  height: max-content;
+  gap: 135px;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: center;
+  overflow: visible;
+}
+
+#exerciseControls mat-progress-spinner {
+  background-color: transparent;
+}
+#controls button {
+  font-size: 14px;
+  gap: 4px;
+  padding: 11px 8px;
+  font-weight: 400;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#previous-btn::before,
+#delete-exercise::before,
+#done-exercise::before,
+#exercises-list::before {
+  content: "";
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 22px;
+  height: 22px;
+}
+#previous-btn::before {
+  background-image: url("../../assets/vectors/navigate-next.svg");
+}
+#delete-exercise::before {
+  background-image: url("../../assets/vectors/delete.svg");
+}
+#done-exercise::before {
+  background-image: url("../../assets/vectors/checkmark.svg");
+}
+#exercises-list::before {
+  background-image: url("../../assets/vectors/check.svg");
+}
+.start,
+.stop {
+  --radii: 0.5em;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 20px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  width: 250px;
+  height: 250px;
+  font-size: var(--size, 1rem);
+  font-weight: 200;
+  transition: 0.5s;
+  font-size: 30px;
+  background-size: 280% auto;
+  border: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  color: var(--btn-bg-color);
+}
+.start {
+  --clr-font-main: hsla(0 0% 20% / 100);
+  --btn-bg-1: #5199c9;
+  --btn-bg-2: #320a6b;
+  --btn-bg-color: hsla(360 100% 100% / 1);
+  background-image: linear-gradient(
+    325deg,
+    var(--btn-bg-2) 0%,
+    var(--btn-bg-1) 50%,
+    var(--btn-bg-2) 100%
+  );
+  box-shadow: 0px 0px 20px rgba(71, 184, 255, 0.5),
+    0px 5px 5px -1px rgba(58, 125, 233, 0.25),
+    inset 5px 5px 8px rgba(175, 230, 255, 0.6),
+    inset -5px -5px 8px rgba(19, 95, 216, 0.35);
+}
+.start:hover,.stop:hover {
+  background-position: right top;
+}
+.start:is(:focus, :focus-visible, :active) {
+  outline: none;
+  border: none;
+  box-shadow: 0 0 0 3px var(--btn-bg-color), 0 0 0 6px var(--btn-bg-2);
+}
+@media (prefers-reduced-motion: reduce) {
+  .start, .stop {
+    transition: linear;
+  }
+}
+.stop {
+  --clr-font-main: hsla(0 0% 20% / 100);
+  --btn-bg-1: #cb5555;
+  --btn-bg-2: #8e1e1e;
+  --btn-bg-color: hsla(360 100% 100% / 1);
+  background-image: linear-gradient(
+    325deg,
+    var(--btn-bg-2) 0%,
+    var(--btn-bg-1) 50%,
+    var(--btn-bg-2) 100%
+  );
+  box-shadow: 0px 0px 20px rgba(120, 203, 255, 0.5),
+    0px 5px 5px -1px rgba(233, 58, 58, 0.25),
+    inset 5px 5px 8px rgba(175, 230, 255, 0.6),
+    inset -5px -5px 8px rgba(216, 19, 19, 0.35);
+}
+.stop:is(:focus, :focus-visible, :active) {
+  outline: none;
+  border: none;
+  box-shadow: 0 0 0 3px var(--btn-bg-color), 0 0 0 6px var(--btn-bg-2);
+}
+

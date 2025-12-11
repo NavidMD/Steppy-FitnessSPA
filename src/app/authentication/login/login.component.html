@@ -1,0 +1,69 @@
+<div class="flex justify-center items-center w-full h-[calc(100vh-170px)]">
+  <div class="bg-transparent w-6/8 h-[620px] flex flex-row-reverse justify-center items-center p-10 pb-24">
+    <form class="flex flex-col justify-between items-center text-right gap-y-7 w-3/5 h-full pr-10"
+      #loginForm="ngForm" (ngSubmit)="submitLogin(loginForm)">
+      <p class="text-[28px] text-headingsColor font-bold pb-4">
+         ورود به<span
+          class="twTextGradient font-bold text-[34px] font-sans"><mat-icon>fitness_center</mat-icon>Steppy</span>
+      </p>
+      <mat-form-field class="w-full">
+        <mat-label>ایمیل</mat-label>
+        <mat-icon *ngIf="emailInput.dirty" [color]="emailInput.valid ? 'accent' : 'warn'" matSuffix>
+          {{ emailInput.valid ?"task_alt" : "error" }}
+        </mat-icon>
+        <input matInput ngModel email name="email" required #emailInput="ngModel" />
+        <mat-hint>example&#64;gmail.com</mat-hint>
+        <mat-error *ngIf="emailInput.touched && emailInput.value.length === 0">
+          ایمیل نباید خالی باشد
+        </mat-error>
+        <mat-error *ngIf="emailInput.value.length && emailInput.invalid">
+          ایمیل اشتباه است
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="w-full">
+        <mat-label>کلمه عبور</mat-label>
+        <button matIconButton matSuffix *ngIf="passwordInput.dirty" (click)="hidePassword = !hidePassword">
+          <mat-icon matIconSuffix>
+            {{hidePassword ? "visibility" : "visibility_off"}}
+          </mat-icon>
+        </button>
+        <mat-icon *ngIf="passwordInput.dirty" [color]="passwordInput.valid ? 'accent' : 'warn'" matSuffix>
+          {{passwordInput.valid ? "task_alt" : "error" }}
+        </mat-icon>
+        <input [type]="hidePassword ? 'password' : 'text'" minlength="8" matInput ngModel name="password" required
+          #passwordInput="ngModel" />
+        <mat-hint class="w-full relative">
+           کلمه عبور خود را وارد کنید
+          <span class="absolute left-0 top-0.5" [ngClass]="{ 'text-green-600': passwordInput.value.length >= 8 }"
+            *ngIf="passwordInput.dirty">
+            {{ passwordInput.value.length }} / 8
+          </span>
+        </mat-hint>
+        <mat-error *ngIf="passwordInput.touched && passwordInput.value.length === 0">
+          کلمه عبور نباید خالی باشد
+        </mat-error>
+        <mat-error *ngIf="passwordInput.value.length && passwordInput.value.length < 8">
+          کلمه عبور حداقل 8 کاراکتر است
+        </mat-error>
+        <mat-error *ngIf="passwordInput.value.length >= 8 && passwordInput.control.hasError('passwordPattern')">
+          کلمه عبور باید دارای حداقل یک عدد و کاراکتر خاص باشد(&,&#64;,#,...)
+        </mat-error>
+      </mat-form-field>
+      <button type="submit" [disabled]="!loginForm.valid"
+        class="twGradientButton twBackgroundGradient disabled:opacity-70 w-full p-3 mt-auto text-xl rounded-lg">
+        ورود به حساب
+      </button>
+    </form>
+    <div class="flex flex-col justify-between items-center text-center w-2/5 h-full border-l border-gray-300">
+      <img class="w-9/10 h-[340px]" src="../../../assets/vectors/digital-contract.svg"/>
+      <div class="w-full h-fit text-justify px-9">
+        <p class="leading-6 text-gray-600">با عضویت در Steppy می توانید با دریافت برنامه تمرینی خصوصی توسط مربیان مجرب به صورت هفتگی و روزانه روند پیشرفت خود را مشاهده کنید و به بروز ترین مقالات آموزشی دسترسی داشته باشید.</p>
+      </div>
+      <p class="text-md">
+        تاحالا ثبت نام نکردی؟
+        <a class="text-blue-600" routerLink="/signup">ثبت نام</a>
+      </p>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,75 @@
+mat-toolbar {
+  width: 100%;
+  max-width: 1600px;
+  height: 170px;
+  background-color: transparent;
+  padding: 20px 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: start;
+}
+ul li {
+  cursor: pointer;
+}
+ul li:hover {
+  background: linear-gradient(to right, #076f2d, #3b82f6);
+  background-clip: text;
+  color: transparent;
+  transition: 0.2s;
+}
+
+#welcome-btn,
+#logout-btn {
+  width: fit-content;
+  height: 44px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+}
+#logout-btn {
+  opacity: 0;
+  animation: slideLeft 0.7s forwards 4s ease;
+}
+#welcome-btn span {
+  overflow: hidden;
+  width: 0;
+  animation: fadeOutText 4s forwards 0.5s ease;
+}
+@keyframes slideLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    display: flex;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeOutText {
+  0% {
+    display: none;
+    width: 0;
+    opacity: 0;
+  }
+  10% {
+    display: block;
+    opacity: 1;
+    width: 130px;
+  }
+  90% {
+    display: block;
+    opacity: 1;
+    width: 130px;
+  }
+  100% {
+    display: none;
+    opacity: 0;
+  }
+}

@@ -1,0 +1,14 @@
+<h2 mat-dialog-title class="font-IRANSANSdn">آماده ای؟</h2>
+<mat-dialog-content>
+  <p>نام حرکت:  {{data.name}}</p>
+  <p>تعداد ست: {{data.sets}} | تعداد حرکات: {{data.reps}}</p>
+  <p id="countdown" class="animate-fadeInCenter">{{started? 'شروع...': mainCountDown}}</p>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button class="bg-btnSecondColor shadow-md shadow-black/30"
+          [ngClass]="started? 'animate-scaleXWiderToLeft text-[16px]':'text-[14px]'"
+          matButton (click)="closeDialog('start')">
+          <span *ngIf="started">{{mainCountDown}} | </span>شروع
+  </button>
+  <button class="bg-red-400 text-[15px] shadow-md shadow-black/30" matButton (click)="closeDialog('cancel')">انصراف</button>
+</mat-dialog-actions>

@@ -1,0 +1,54 @@
+/* Mahoor Fonts */
+@font-face {
+  font-family: 'Mahoor';
+  src:  url('./assets/fonts/mahoor/Mahoor-Medium.ttf') format('truetype'),
+        url('./assets/fonts/mahoor/Mahoor-Medium.woff2') format('woff2'),
+        url('./assets/fonts/mahoor/Mahoor-Regular.ttf') format('truetype'),
+        url('./assets/fonts/mahoor/Mahoor-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Mahoor';
+  src:  url('./assets/fonts/mahoor/Mahoor-SemiBold.ttf') format('truetype'),
+        url('./assets/fonts/mahoor/Mahoor-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Mahoor';
+  src:  url('./assets/fonts/mahoor/Mahoor-Bold.ttf') format('truetype'),
+        url('./assets/fonts/mahoor/Mahoor-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Mahoor';
+  src:  url('./assets/fonts/mahoor/Mahoor-ExtraBold.ttf') format('truetype'),
+        url('./assets/fonts/mahoor/Mahoor-ExtraBold.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+}
+
+/* IRAN SANS DN Fonts */
+@font-face {
+  font-family: 'IRANSANSdn';
+  src:  url('./assets/fonts/IRANSANSdn/iransansdnlight.ttf') format('truetype'),
+        url('./assets/fonts/IRANSANSdn/iransansdnlight.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'IRANSANSdn';
+  src:  url('./assets/fonts/IRANSANSdn/iransansdn.ttf') format('truetype'),
+        url('./assets/fonts/IRANSANSdn/iransansdn.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'IRANSANSdn';
+  src:  url('./assets/fonts/IRANSANSdn/iransansdnbold.ttf') format('truetype'),
+        url('./assets/fonts/IRANSANSdn/iransansdnbold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}

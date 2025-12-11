@@ -1,0 +1,54 @@
+<mat-sidenav-container>
+  <mat-sidenav #sidenav>
+    <div class="w-full h-full overflow-hidden flex flex-col justify-start">
+      <section
+        class="w-full bg-sideNavHeaderColor rounded-2xl h-fit flex flex-row justify-between items-center px-4 py-2 mb-4">
+        <div class="w-fit flex flex-row justify-end items-center">
+          <button class="flex justify-center items-center bg-white p-2.5 twGradientButton rounded-xl">
+            <mat-icon>account_circle</mat-icon>
+          </button>
+          <div class="w-max h-full flex flex-col justify-center items-start px-4">
+            <p class="pt-2.5 font-bold">{{ authStatus ? 'خوش آمدید' : 'نامشخص'}}</p>
+            <p>{{ authStatus? 'عضو دائم' : 'عضو نشده' }}</p>
+          </div>
+        </div>
+        <button (click)="loggingHandler()" [ngClass]="authStatus? 'bg-red-500/90':'bg-blue-500/90'" class="flex justify-center items-center p-2.5 text-white twGradientButton rounded-full">
+          <mat-icon>
+            {{ authStatus ? 'power_settings_new' : 'person_add_alt'}}
+          </mat-icon>
+        </button>
+      </section>
+      <section class="w-full border-t border-gray-300 h-fit flex flex-col justify-between items-start py-3 px-4">
+        <p class="text-lg">خدمات</p>
+        <ul class="py-2">
+          <li><mat-icon>event</mat-icon>برنامه های تمرینی</li>
+          <li><mat-icon>auto_stories</mat-icon>مقالات آموزشی</li>
+          <li><mat-icon>co_present</mat-icon>مربیان</li>
+        </ul>
+      </section>
+      <section class="w-full border-t border-gray-300 h-fit flex flex-col justify-between items-start py-3 px-4">
+        <p class="text-lg">داشبورد</p>
+        <ul class="py-2">
+          <li><mat-icon>checklist_rtl</mat-icon>برنامه های تمرینی من</li>
+          <li><mat-icon>history</mat-icon>تاریخچه خریدها</li>
+          <li><mat-icon>message</mat-icon>پیام ها</li>
+          <li><mat-icon>insights</mat-icon>روند پیشرفت</li>
+        </ul>
+      </section>
+      <section class="w-full border-t border-gray-300 h-fit flex flex-col justify-between items-start py-3 px-4">
+        <p class="text-lg">تنظیمات</p>
+        <ul class="py-2">
+          <li><mat-icon>settings</mat-icon>تنظمات برنامه</li>
+          <li><mat-icon>info</mat-icon>درباره ما</li>
+        </ul>
+      </section>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-header (menuBtnClicked)="sidenav.toggle()"></app-header>
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+    <app-footer></app-footer>
+  </mat-sidenav-content>
+</mat-sidenav-container>
