@@ -1,6 +1,6 @@
 <div class="flex justify-center items-center w-full h-[calc(100vh-170px)]">
   <div class="bg-transparent w-6/8 h-[620px] flex flex-row-reverse justify-center items-center p-10 pb-24">
-    <form class="flex flex-col justify-between items-center text-right gap-y-7 w-3/5 h-full pr-10"
+    <form class="flex flex-col justify-between items-center text-right gap-y-7 w-3/5 h-full pr-8.5"
       #loginForm="ngForm" (ngSubmit)="submitLogin(loginForm)">
       <p class="text-[28px] text-headingsColor font-bold pb-4">
          ورود به<span
@@ -50,16 +50,16 @@
         </mat-error>
       </mat-form-field>
       <button type="submit" [disabled]="!loginForm.valid"
-        class="twGradientButton twBackgroundGradient disabled:opacity-70 w-full p-3 mt-auto text-xl rounded-lg">
+        class="twGradientButton twBackgroundGradient disabled:opacity-70 w-full p-4 mt-auto text-[17px] rounded-xl">
         ورود به حساب
       </button>
     </form>
     <div class="flex flex-col justify-between items-center text-center w-2/5 h-full border-l border-gray-300">
-      <img class="w-9/10 h-[340px]" src="../../../assets/vectors/digital-contract.svg"/>
-      <div class="w-full h-fit text-justify px-9">
+      <img class="w-9/10 h-[340px] px-1" src="../../../assets/vectors/digital-contract.svg"/>
+      <div class="w-full h-fit text-justify px-8">
         <p class="leading-6 text-gray-600">با عضویت در Steppy می توانید با دریافت برنامه تمرینی خصوصی توسط مربیان مجرب به صورت هفتگی و روزانه روند پیشرفت خود را مشاهده کنید و به بروز ترین مقالات آموزشی دسترسی داشته باشید.</p>
       </div>
-      <p class="text-md">
+      <p class="text-md pt-5">
         تاحالا ثبت نام نکردی؟
         <a class="text-blue-600" routerLink="/signup">ثبت نام</a>
       </p>

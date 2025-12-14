@@ -1,99 +1,214 @@
 <div class="flex justify-center items-center w-full h-[calc(100vh-170px)]">
-  <div class="bg-transparent w-6/8 h-[700px] flex flex-row-reverse justify-center items-center p-10 pb-24">
-    <form class="flex flex-col justify-between items-center text-center gap-y-7 w-3/5 h-full pr-10"
-      #signupForm="ngForm" (ngSubmit)="submitSignUpForm(signupForm)">
-      <mat-form-field class="w-full">
-        <mat-label>نام کاربری</mat-label>
-        <mat-icon *ngIf="usernameInput.dirty" [color]="usernameInput.valid ? 'accent' : 'warn'" matSuffix>
-          {{usernameInput.valid ? "task_alt" : "error" }}
-        </mat-icon>
-        <input matInput name="username" required minlength="6" ngModel #usernameInput="ngModel" />
-        <mat-hint class="w-full relative">نام کاربری باید حداقل 6 کلمه باشد
-          <span class="absolute left-0 top-0.5" [ngClass]="{ 'text-green-600': usernameInput.value.length >= 6 }"
-            *ngIf="usernameInput.dirty">
-            {{ usernameInput.value.length }} / 6
-          </span>
-        </mat-hint>
-        <mat-error *ngIf="usernameInput.touched && usernameInput.value.length === 0">
-          نام کاربری نباید خالی باشد
-        </mat-error>
-        <mat-error *ngIf="usernameInput.value.length && usernameInput.value.length < 6">
-          نام کاربری باید حداقل 6 کاراکتر باشد
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field class="w-full">
-        <mat-label>ایمیل</mat-label>
-        <mat-icon *ngIf="emailInput.dirty" [color]="emailInput.valid ? 'accent' : 'warn'" matSuffix>
-          {{ emailInput.valid ?"task_alt" : "error" }}
-        </mat-icon>
-        <input matInput ngModel email name="email" required #emailInput="ngModel" />
-        <mat-hint>example&#64;gmail.com</mat-hint>
-        <mat-error *ngIf="emailInput.touched && emailInput.value.length === 0">
-          ایمیل نباید خالی باشد
-        </mat-error>
-        <mat-error *ngIf="emailInput.value.length && emailInput.invalid">
-          ایمیل اشتباه است
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field class="w-full">
-        <mat-label>کلمه عبور</mat-label>
-        <button matIconButton matSuffix *ngIf="passwordInput.dirty" (click)="hidePassword = !hidePassword">
-          <mat-icon matIconSuffix>
-            {{hidePassword ? "visibility" : "visibility_off"}}
-          </mat-icon>
-        </button>
-        <mat-icon *ngIf="passwordInput.dirty" [color]="passwordInput.valid ? 'accent' : 'warn'" matSuffix>
-          {{passwordInput.valid ? "task_alt" : "error" }}
-        </mat-icon>
-        <input [type]="hidePassword ? 'password' : 'text'" minlength="8" matInput ngModel name="password" required
-          #passwordInput="ngModel" (ngModelChange)="passwordCheck()" />
-        <mat-hint class="w-full relative">
-          یک کلمه عبور با استفاده از اعداد و کاراکترهای خاص ایجاد کنید(&,&#64;,#,...)
-          <span class="absolute left-0 top-0.5" [ngClass]="{ 'text-green-600': passwordInput.value.length >= 8 }"
-            *ngIf="passwordInput.dirty">
-            {{ passwordInput.value.length }} / 8
-          </span>
-        </mat-hint>
-        <mat-error *ngIf="passwordInput.touched && passwordInput.value.length === 0">
-          کلمه عبور نباید خالی باشد
-        </mat-error>
-        <mat-error *ngIf="passwordInput.value.length && passwordInput.value.length < 8">
-          کلمه عبور باید حداقل 8 کاراکتر باشد
-        </mat-error>
-        <mat-error *ngIf="passwordInput.value.length >= 8 && passwordInput.control.hasError('passwordPattern')">
-          کلمه عبور باید دارای حداقل یک عدد و کاراکتر خاص باشد(&,&#64;,#,...)
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field class="w-full">
-        <mat-label>تاریخ تولد</mat-label>
-        <mat-icon *ngIf="birthdayInput.dirty" [color]="birthdayInput.valid ? 'accent' : 'warn'" matSuffix>
-          {{birthdayInput.valid ? "task_alt" : "error" }}
-        </mat-icon>
-        <input matInput name="birthday" [matDatepicker]="matCalender" required ngModel date #birthdayInput="ngModel" />
-        <mat-hint>روز/ماه/سال</mat-hint>
-        <mat-datepicker-toggle matIconSuffix [for]="matCalender"></mat-datepicker-toggle>
-        <mat-datepicker #matCalender></mat-datepicker>
-        <mat-error *ngIf="birthdayInput.invalid">تاریخ تولد نامعتبر وارد شده یا خالی است</mat-error>
-      </mat-form-field>
-      <mat-checkbox ngModel required name="agreement" color="primary" class="w-full text-right" #agreementInput="ngModel">
-        <a class="text-blue-800 underline" href="www.google.com">شرایط و قوانین</a>
-        را مطالعه کرده و آنها را میپذیرم.
-      </mat-checkbox>
-      <button type="submit" [disabled]="!signupForm.valid"
-        class="twGradientButton twBackgroundGradient disabled:opacity-70 w-full p-3 mt-auto text-xl rounded-lg">
-        ثبت نام
-      </button>
-    </form>
-    <div class="flex flex-col justify-between items-center text-center w-2/5 h-full border-l border-gray-300">
+  <div class="bg-transparent w-6/8 h-[800px] flex flex-row-reverse justify-center items-center p-10 pb-24">
+    <div id="formStepperWrapper" class="w-3/5 h-full">
+      <mat-stepper id="signupStepper" linear animationDuration="500" #signupStepper>
+        <mat-step completed="false">
+          <ng-template matStepLabel>اطلاعات حساب کاربری</ng-template>
+          <form class="flex flex-col justify-between items-center text-center gap-y-7 w-full h-full"
+            #signupForm="ngForm">
+            <mat-form-field class="w-full">
+              <mat-label>نام کاربری</mat-label>
+              <mat-icon *ngIf="usernameInput.dirty" [color]="usernameInput.valid ? 'accent' : 'warn'" matSuffix>
+                {{usernameInput.valid ? "task_alt" : "error" }}
+              </mat-icon>
+              <input matInput name="username" required minlength="6" ngModel #usernameInput="ngModel" />
+              <mat-hint class="w-full relative">نام کاربری (حداقل 6 کاراکتر)
+                <span class="absolute left-0 top-0.5" [ngClass]="{ 'text-green-600': usernameInput.value.length >= 6 }"
+                  *ngIf="usernameInput.dirty">
+                  {{ usernameInput.value.length }} / 6
+                </span>
+              </mat-hint>
+              <mat-error *ngIf="usernameInput.touched && usernameInput.value.length === 0">
+                نام کاربری نباید خالی باشد
+              </mat-error>
+              <mat-error *ngIf="usernameInput.value.length && usernameInput.value.length < 6">
+                نام کاربری باید حداقل 6 کاراکتر باشد
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="w-full">
+              <mat-label>ایمیل</mat-label>
+              <mat-icon *ngIf="emailInput.dirty" [color]="emailInput.valid ? 'accent' : 'warn'" matSuffix>
+                {{ emailInput.valid ?"task_alt" : "error" }}
+              </mat-icon>
+              <input matInput ngModel email name="email" required #emailInput="ngModel" />
+              <mat-hint>example&#64;gmail.com</mat-hint>
+              <mat-error *ngIf="emailInput.touched && emailInput.value.length === 0">
+                ایمیل نباید خالی باشد
+              </mat-error>
+              <mat-error *ngIf="emailInput.value.length && emailInput.invalid">
+                ایمیل اشتباه است
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="w-full">
+              <mat-label>کلمه عبور</mat-label>
+              <button matIconButton matSuffix *ngIf="passwordInput.dirty" (click)="hidePassword = !hidePassword">
+                <mat-icon matIconSuffix>
+                  {{hidePassword ? "visibility" : "visibility_off"}}
+                </mat-icon>
+              </button>
+              <mat-icon *ngIf="passwordInput.dirty" [color]="passwordInput.valid ? 'accent' : 'warn'" matSuffix>
+                {{passwordInput.valid ? "task_alt" : "error" }}
+              </mat-icon>
+              <input [type]="hidePassword ? 'password' : 'text'" minlength="8" matInput ngModel name="password" required
+                #passwordInput="ngModel" (ngModelChange)="passwordCheck()" />
+              <mat-hint class="w-full relative">
+                یک کلمه عبور با استفاده از اعداد و کاراکترهای خاص ایجاد کنید(&,&#64;,#,...)
+                <span class="absolute left-0 top-0.5" [ngClass]="{ 'text-green-600': passwordInput.value.length >= 8 }"
+                  *ngIf="passwordInput.dirty">
+                  {{ passwordInput.value.length }} / 8
+                </span>
+              </mat-hint>
+              <mat-error *ngIf="passwordInput.touched && passwordInput.value.length === 0">
+                کلمه عبور نباید خالی باشد
+              </mat-error>
+              <mat-error *ngIf="passwordInput.value.length && passwordInput.value.length < 8">
+                کلمه عبور باید حداقل 8 کاراکتر باشد
+              </mat-error>
+              <mat-error *ngIf="passwordInput.value.length >= 8 && passwordInput.control.hasError('passwordPattern')">
+                کلمه عبور باید دارای حداقل یک عدد و کاراکتر خاص باشد(&,&#64;,#,...)
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="w-full">
+              <mat-label>تاریخ تولد</mat-label>
+              <mat-icon *ngIf="birthdayInput.dirty" [color]="birthdayInput.valid ? 'accent' : 'warn'" matSuffix>
+                {{birthdayInput.valid ? "task_alt" : "error" }}
+              </mat-icon>
+              <input matInput name="birthday" [matDatepicker]="matCalender" required ngModel date #birthdayInput="ngModel" />
+              <mat-hint>روز/ماه/سال</mat-hint>
+              <mat-datepicker-toggle matIconSuffix [for]="matCalender"></mat-datepicker-toggle>
+              <mat-datepicker #matCalender></mat-datepicker>
+              <mat-error *ngIf="birthdayInput.invalid && birthdayInput.touched">تاریخ تولد نامعتبر وارد شده یا خالی است</mat-error>
+            </mat-form-field>
+            <mat-checkbox ngModel required name="agreement" color="primary" class="w-full text-right" #agreementInput="ngModel">
+              <a class="text-blue-800 underline" href="www.google.com">شرایط و قوانین</a>
+              را مطالعه کرده و آنها را میپذیرم.
+            </mat-checkbox>
+            <button type="button" (click)="goToNextStep()" [disabled]="!signupForm.valid"
+              class="twBackgroundGradient shadow-lg hover:shadow-md shadow-black/30 transition cursor-pointer disabled:opacity-70 w-full p-4 mt-auto text-[17px] rounded-xl">
+              مرحله بعدی
+            </button>
+          </form>
+        </mat-step>
+        <mat-step completed="false">
+          <ng-template matStepLabel>اطلاعات جسمانی</ng-template>
+          <form class="flex flex-col justify-between items-center text-center gap-y-7 w-full h-full"
+            #physicalInfoForm="ngForm" (ngSubmit)="submitSignUpForm(signupForm,physicalInfoForm)">
+            <div class="w-full flex flex-row gap-3">
+              <mat-form-field class="w-full">
+                <mat-label>نام</mat-label>
+                <mat-icon *ngIf="firstName.dirty" [color]="firstName.valid ? 'accent' : 'warn'" matSuffix>
+                  {{firstName.valid ? "task_alt" : "error" }}
+                </mat-icon>
+                <input pattern="^[A-Za-zآ-ی\s]+$" matInput name="firstName" type="text" required minlength="3" ngModel #firstName="ngModel" />
+                <mat-hint class="w-full relative">نام (حداقل 3 کلمه)</mat-hint>
+                <mat-error *ngIf="firstName.touched && firstName.value.length === 0">
+                  نام نباید خالی باشد
+                </mat-error>
+                <mat-error *ngIf="firstName.value.length && firstName.value.length < 3">
+                  نام باید حداقل 3 کاراکتر باشد
+                </mat-error>
+                <mat-error *ngIf="firstName.value.length > 2 && firstName.invalid">
+                  نام نباید شامل عدد باشد
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field class="w-full">
+                <mat-label>نام خانوادگی</mat-label>
+                <mat-icon *ngIf="lastNameInput.dirty" [color]="lastNameInput.valid ? 'accent' : 'warn'" matSuffix>
+                  {{lastNameInput.valid ? "task_alt" : "error" }}
+                </mat-icon>
+                <input pattern="^[A-Za-zآ-ی\s]+$" matInput name="lastName" type="text" required minlength="3" ngModel #lastNameInput="ngModel" />
+                <mat-hint class="w-full relative">نام خانوادگی (حداقل 3 کلمه)</mat-hint>
+                <mat-error *ngIf="lastNameInput.touched && lastNameInput.value.length === 0">
+                  نام خانوادگی نباید خالی باشد
+                </mat-error>
+                <mat-error *ngIf="lastNameInput.value.length && lastNameInput.value.length < 3">
+                  نام خانوادگی باید حداقل 3 کاراکتر باشد
+                </mat-error>
+                <mat-error *ngIf="lastNameInput.value.length > 2 && lastNameInput.invalid">
+                  نام خانوادگی نباید شامل عدد باشد
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="w-full flex flex-row gap-3">
+              <mat-form-field class="w-full">
+                <mat-label>قد</mat-label>
+                <mat-icon *ngIf="heightInput.dirty" [color]="heightInput.valid ? 'accent' : 'warn'" matSuffix>
+                  {{ heightInput.valid ?"task_alt" : "error" }}
+                </mat-icon>
+                <input matInput ngModel name="height" type="number" min="100" required #heightInput="ngModel" />
+                <mat-hint>قد را به واحد cm وارد کنید</mat-hint>
+                <mat-error *ngIf="heightInput.touched && !heightInput.value">
+                  قد خود را وارد کنید
+                </mat-error>
+                <mat-error *ngIf="heightInput.value && heightInput.value < 100">
+                  قد وارد شده کمتر از حد مجاز است
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field class="w-full">
+                <mat-label>وزن</mat-label>
+                <mat-icon *ngIf="weightInput.dirty" [color]="weightInput.valid ? 'accent' : 'warn'" matSuffix>
+                  {{weightInput.valid ? "task_alt" : "error" }}
+                </mat-icon>
+                <input type="number" min="40" matInput ngModel name="weight" required
+                  #weightInput="ngModel"/>
+                <mat-hint class="w-full relative">
+                  وزن خود را به kg وارد کنید
+                </mat-hint>
+                <mat-error *ngIf="weightInput.touched && !weightInput.value">
+                  وزن خود را وارد کنید
+                </mat-error>
+                <mat-error *ngIf="weightInput.value && weightInput.value < 40">
+                  وزن وارد شده کمتر از حد مجاز است
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <mat-form-field class="w-full">
+              <mat-label>سن</mat-label>
+              <mat-icon *ngIf="ageInput.dirty" [color]="ageInput.valid ? 'accent' : 'warn'" matSuffix>
+                {{ageInput.valid ? "task_alt" : "error" }}
+              </mat-icon>
+              <input type="number" min="6" matInput ngModel name="age" required
+                #ageInput="ngModel"/>
+              <mat-hint class="w-full relative">
+                سن خود را به عدد وارد کنید
+              </mat-hint>
+              <mat-error *ngIf="ageInput.touched && !ageInput.value">
+                سن خود را وارد کنید
+              </mat-error>
+              <mat-error *ngIf="ageInput.value && ageInput.value < 6">
+                سن وارد شده کمتر از حد مجاز است
+              </mat-error>
+            </mat-form-field>
+            <mat-radio-group class="w-full flex flex-row justify-between items-center" name="gender" ngModel #genderInput="ngModel" required>
+              <mat-label class="text-[15px]">جنسیت:</mat-label>
+              <mat-radio-button value="male">مرد</mat-radio-button>
+              <mat-radio-button value="female">زن</mat-radio-button>
+            </mat-radio-group>
+            <p class="leading-6 text-gray-600 text-right">اطلاعات وارد شده در این قسمت جهت بررسی و استفاده در ابزارهای سنجش تحرک و میزان چربی سوزی، عضله سازی و ... استفاده خواهد شد.</p>
+            <div class="w-full flex flex-row gap-2.5">
+              <button matStepperPrevious
+                class="twBackgroundGradient shadow-lg hover:shadow-md shadow-black/30 transition cursor-pointer disabled:opacity-70 w-2/5 p-4 mt-auto text-[17px] rounded-xl">
+                مرحله قبلی
+              </button>
+              <button type="submit" [disabled]="!physicalInfoForm.valid"
+                class="twBackgroundGradient shadow-lg hover:shadow-md shadow-black/30 transition cursor-pointer disabled:opacity-70 w-full p-4 mt-auto text-[17px] rounded-xl">
+                ثبت نام
+              </button>
+            </div>
+          </form>
+        </mat-step>
+      </mat-stepper>
+    </div>
+    <div class="flex flex-col justify-center items-center text-center w-2/5 h-full border-l border-gray-300/80">
       <p class="text-[28px] text-headingsColor font-bold">
          عضویت در<span
           class="twTextGradient font-bold text-[34px] font-sans"><mat-icon>fitness_center</mat-icon>Steppy</span>
       </p>
-      <img class="w-9/10 h-[420px]" src="../../../assets/vectors/digital-contract.svg"/>
-      <div class="w-full h-fit text-justify px-9">
-        <p class="leading-6 text-gray-600">با عضویت در Steppy می توانید با دریافت برنامه تمرینی خصوصی توسط مربیان مجرب به صورت هفتگی و روزانه روند پیشرفت خود را مشاهده کنید و به بروز ترین مقالات آموزشی دسترسی داشته باشید.</p>
+      <img class="w-9/10 h-[340px] px-1" src="../../../assets/vectors/digital-contract.svg"/>
+      <div class="w-full h-fit text-justify px-8">
+        <p class="leading-6 text-gray-600">با عضویت در Steppy می توانید با دریافت برنامه تمرینی خصوصی توسط مربیان مجرب و انجام تمرینات متناسب با ویژگی های جسمانی خود به صورت هفتگی و روزانه روند پیشرفت خود را مشاهده کنید و به بروز ترین مقالات آموزشی دسترسی داشته باشید.</p>
       </div>
-      <p class="text-md">
+      <p class="text-md pt-5">
         قبلا ثبت نام کردی؟
         <a class="text-blue-600" routerLink="/login">ورود به حساب کاربری</a>
       </p>

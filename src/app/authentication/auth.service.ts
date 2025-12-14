@@ -41,6 +41,7 @@ export class AuthService {
     this.user = null;
     this.authenticationStatus.next(false);
     sessionStorage.clear();
+    localStorage.clear();
   }
 
   getUser() {

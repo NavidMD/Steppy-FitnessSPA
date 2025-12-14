@@ -16,6 +16,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDialogModule } from "@angular/material/dialog";
+import { MatRadioModule } from '@angular/material/radio';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { MatDialogModule } from "@angular/material/dialog";
     MatStepperModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
-    MatDialogModule
+    MatDialogModule,
+    MatRadioModule
   ],
   exports: [
     MatFormFieldModule,
@@ -55,7 +57,8 @@ import { MatDialogModule } from "@angular/material/dialog";
     MatStepperModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
-    MatDialogModule
+    MatDialogModule,
+    MatRadioModule
   ],
 })
 export class MaterialCompsModule { }
