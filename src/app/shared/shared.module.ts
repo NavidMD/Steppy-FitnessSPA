@@ -1,10 +1,11 @@
 import { NgModule } from "@angular/core";
 import { JalaliPipe } from "./pipes/jalali.pipe";
+import { GetTrainingsService } from "./services/getTrainings.service";
 
 
 @NgModule({
   declarations:[JalaliPipe],
-  providers:[],
+  providers:[GetTrainingsService],
   imports:[],
   exports:[JalaliPipe]
 })

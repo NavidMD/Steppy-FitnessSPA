@@ -8,7 +8,7 @@ import { ActiveTrainingComponent } from './active-training/active-training.compo
 import { AuthGuard, PermissionService } from './authentication/auth.guard';
 
 const routes: Routes = [
-  { path: 'training/:id', component: ActiveTrainingComponent, canActivate: [AuthGuard] },
+  { path: 'training/:id/:name', component: ActiveTrainingComponent, canActivate: [AuthGuard] },
   { path: 'training', component: TrainingComponent, canActivate: [AuthGuard] },
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },

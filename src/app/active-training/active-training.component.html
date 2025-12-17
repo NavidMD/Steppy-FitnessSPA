@@ -35,20 +35,20 @@
           <mat-card-title>
             {{name}}
             <span class="rounded-xl" id="level"
-              [ngClass]="{'hard': activeExerciseModel.hardness === 'سخت',
-                'normal': activeExerciseModel.hardness === 'متوسط',
-                'easy': activeExerciseModel.hardness === 'آسان'}"
-              > <span>{{activeExerciseModel.hardness}}</span>
+              [ngClass]="{'hard': (activeExerciseModel$ | async)?.hardness === 'سخت',
+                'normal': (activeExerciseModel$ | async)?.hardness === 'متوسط',
+                'easy': (activeExerciseModel$ | async)?.hardness === 'آسان'}"
+              > <span>{{(activeExerciseModel$ | async)?.hardness}}</span>
             </span>
           </mat-card-title>
           <ul class="w-full h-auto flex flex-col items-start gap-y-3 pl-1 mb-[15px] text-gray-700">
-            <li id="muscleTarget">عضلات هدف: <span>{{activeExerciseModel.target}}</span> </li>
-            <li id="muscleWeakness">نقاط ضعف: <span>{{activeExerciseModel.weakness}}</span></li>
+            <li id="muscleTarget">عضلات هدف: <span>{{(activeExerciseModel$ | async)?.target}}</span> </li>
+            <li id="muscleWeakness">نقاط ضعف: <span>{{(activeExerciseModel$ | async)?.weakness}}</span></li>
             <li id="setCounts">تعداد ست: <span>{{sets.length}}</span></li>
             <li id="repCounts">تعداد تکرار: <span>{{reps}}</span></li>
           </ul>
-          <p class="w-full leading-6 text-[14px] text-justify text-gray-700">{{activeExerciseModel.description}}</p>
-          <button id="exerciseInfo" class="w-full h-[44px] bg-btnSecondColor rounded-xl text-white shadow-lg shadow-black/30 hover:shadow-md transition cursor-pointer">
+          <p class="w-full leading-6 text-[14px] text-justify text-gray-700">{{(activeExerciseModel$ | async)?.description}}</p>
+          <button id="exerciseInfo" class="w-full h-[44px] bg-btnSecondColor rounded-xl text-white shadow-md shadow-black/30 hover:shadow-sm transition cursor-pointer">
             <a class="w-full twFlexCentering" [href]="'https://fitamin.ir/mag/movement/'+name+'/'">آموزش حرکت  {{name}}</a>
           </button>
         </mat-card-content>
