@@ -1,7 +1,18 @@
-export interface UserInfo {
-  userId?: number;
-  userName: string;
+export interface UserSigningInfo {
   password: string;
   email: string;
-  dateOfBirth: Date;
+}
+
+export interface UserAdditionalInfo {
+  uid?: string;
+  userName: string
+  fistName: string;
+  lastName: string;
+  height: number;
+  weight: number;
+  age: number;
+  dateOfBirth: string;
+  gender: 'male' | 'female';
+  newTrainings?: object[];
+  completedTrainings?: object[];
 }

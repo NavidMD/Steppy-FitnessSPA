@@ -2,6 +2,8 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { NgForm, NgModel } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { MatStepper } from '@angular/material/stepper';
+import { timestamp } from 'rxjs';
+import moment from 'jalali-moment';
 
 @Component({
   selector: 'app-signup',
@@ -23,21 +25,20 @@ export class SignupComponent {
   }
 
   submitSignUpForm(signupForm: NgForm,physicalInfoForm: NgForm) {
-    this.authService.register({
-      userName: signupForm.value.username,
-      email: signupForm.value.email,
-      dateOfBirth: signupForm.value.birthday,
-      password: signupForm.value.password,
-    })
     const userPhysicalInfo = {
+      userName: signupForm.value.username,
       fistName: physicalInfoForm.value.firstName,
       lastName: physicalInfoForm.value.lastName,
       height: physicalInfoForm.value.height,
       weight: physicalInfoForm.value.weight,
       age: physicalInfoForm.value.age,
+      dateOfBirth: moment(signupForm.value.dateOfBirth).format("YYYY-MM-DD"),
       gender: physicalInfoForm.value.gender
     }
-    localStorage.setItem('userPhysicalInfo',JSON.stringify(userPhysicalInfo));
+    this.authService.register({
+      email: signupForm.value.email,
+      password: signupForm.value.password,
+    },userPhysicalInfo)
   }
 
   passwordCheck() {

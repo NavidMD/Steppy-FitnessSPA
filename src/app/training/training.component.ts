@@ -1,8 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatSelect, MatSelectChange } from '@angular/material/select';
-import { CompletedTrainingInfo, TrainingInfo } from '../shared/types';
+import {
+  CompletedTrainingInfo,
+  NewTrainingInfo,
+  TrainingInfo,
+} from '../shared/types';
 import { BehaviorSubject, Observable, Subscription, switchMap } from 'rxjs';
 import { GetTrainingsService } from '../shared/services/getTrainings.service';
+import { AuthService } from '../authentication/auth.service';
 
 @Component({
   selector: 'app-training',
@@ -10,13 +15,17 @@ import { GetTrainingsService } from '../shared/services/getTrainings.service';
   styleUrl: './training.component.css',
 })
 export class TrainingComponent implements OnInit, OnDestroy {
-  constructor(private trainingService: GetTrainingsService) {}
+  constructor(
+    private trainingService: GetTrainingsService,
+    private authService: AuthService
+  ) {}
   subscription = new Subscription();
   //data from Firebase
   allExercises$!: Observable<TrainingInfo[]>;
   selectedExercise$!: Observable<TrainingInfo>;
   setCounts: number[] = [2, 3, 4, 5, 6, 7, 8];
   repCounts: number[] = [...this.setCounts, 9, 10, 11, 12, 13, 14, 15];
+  userId!: string;
 
   //mutable data that changes by user input
   private selectedName = new BehaviorSubject<string>('پلانک');
@@ -40,18 +49,14 @@ export class TrainingComponent implements OnInit, OnDestroy {
       let newSetCount = sets.value;
       let newRepCount = reps.value;
       let dateAdded = new Date();
-      const newExercise = {
+      const newExercise: NewTrainingInfo = {
         id: Date.now(),
         name: newExerciseName,
         sets: newSetCount,
         reps: newRepCount,
         dateAdded,
       };
-      this.newTrainings.push(newExercise);
-      localStorage.setItem('newTrainings', JSON.stringify(this.newTrainings));
-    }
-    if (!localStorage.getItem('completedTrainings')) {
-      localStorage.setItem('completedTrainings', JSON.stringify([]));
+      this.trainingService.addToNewTrainingsDb(newExercise, this.userId);
     }
   }
 
@@ -69,6 +74,8 @@ export class TrainingComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    //getting user UID
+    this.authService.userIdSubject.subscribe((id) => (this.userId = id));
     //getting all models from database
     this.allExercises$ = this.trainingService.getExerciseModels();
     //getting realtime selected data from database

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { CompletedTrainingInfo, TrainingInfo } from '../types';
+import { CompletedTrainingInfo, NewTrainingInfo, TrainingInfo } from '../types';
 import { map, Observable, Subject } from 'rxjs';
+import firebase from 'firebase/compat/app';
 
 @Injectable()
 export class GetTrainingsService {
@@ -26,6 +27,16 @@ export class GetTrainingsService {
 
   addToCompletedTrainingsDb(exercise: CompletedTrainingInfo) {
     this.database.collection('CompletedTrainings').add(exercise);
+  }
+
+  addToNewTrainingsDb(exercise: NewTrainingInfo, userId: string) {
+    console.log(userId);
+    this.database
+      .collection('Users')
+      .doc(userId)
+      .update({
+        newTrainings: firebase.firestore.FieldValue.arrayUnion(exercise),
+      });
   }
 
   getCompletedTrainingsDb() {

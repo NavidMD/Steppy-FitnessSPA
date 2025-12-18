@@ -10,9 +10,17 @@ export type TrainingInfo = {
 };
 
 export type CompletedTrainingInfo = {
-  dateCompleted: Date,
-  name: string,
-  sets: number,
-  reps: number,
-  id?: string
+  dateCompleted: Date;
+  name: string;
+  sets: number;
+  reps: number;
+  id?: string;
+};
+
+export type NewTrainingInfo = {
+  id: number;
+  name: string;
+  sets: number;
+  reps: number;
+  dateAdded: Date
 };

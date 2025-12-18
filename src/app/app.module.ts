@@ -24,6 +24,7 @@ import { ActiveTrainingComponent } from './active-training/active-training.compo
 import { StartModalComponent } from './active-training/start-modal/start-modal.component';
 //firebase
 import { firebaseConfig } from '../environment';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 //date adapter
 import { MaterialPersianDateAdapter, PERSIAN_DATE_FORMATS } from './material.persian-date.adapter';
 
@@ -52,7 +53,8 @@ import { MaterialPersianDateAdapter, PERSIAN_DATE_FORMATS } from './material.per
     MatLine,
     HttpClientModule,
     SharedModule,
-    AngularFireModule.initializeApp(firebaseConfig)
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireAuthModule
 ],
   providers: [
     provideAnimationsAsync(),
