@@ -6,18 +6,19 @@ import { SignupComponent } from './authentication/signup/signup.component';
 import { TrainingComponent } from './training/training.component';
 import { ActiveTrainingComponent } from './active-training/active-training.component';
 import { AuthGuard, PermissionService } from './authentication/auth.guard';
+import { FormStrictionService } from './authentication/form.guard';
 
 const routes: Routes = [
-  { path: 'training/:id/:name', component: ActiveTrainingComponent, canActivate: [AuthGuard] },
+  { path: 'training/:id', component: ActiveTrainingComponent, canActivate: [AuthGuard] },
   { path: 'training', component: TrainingComponent, canActivate: [AuthGuard] },
-  { path: 'signup', component: SignupComponent },
-  { path: 'login', component: LoginComponent },
+  { path: 'signup', component: SignupComponent, canActivate: [FormStrictionService]},
+  { path: 'login', component: LoginComponent, canActivate: [FormStrictionService] },
   { path: '', component: HomeComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers: [PermissionService]
+  providers: [PermissionService, FormStrictionService]
 })
 export class AppRoutingModule { }

@@ -24,7 +24,7 @@
     <button
       *ngIf="authStatus === false"
       routerLink="/login"
-      class="twFlexCentering gap-1.5 pl-3.5 pr-3 py-1.5 text-[16px] twBackgroundGradient twGradientButton rounded-xl"
+      class="twFlexCentering gap-1.5 pl-3.5 pr-3 py-1.5 text-[15px] twBackgroundGradient twGradientButton rounded-xl"
     >
       <mat-icon>person</mat-icon>
       ورود به حساب
@@ -41,9 +41,9 @@
       id="welcome-btn"
       *ngIf="authStatus === true"
       routerLink="/training"
-      class="text-[16px] twBackgroundGradient twGradientButton p-2.5 rounded-xl"
+      class="text-[15px] twBackgroundGradient twGradientButton p-2.5 rounded-xl"
     >
-      <span class="overflow-hidden inline">خوش آمدید :)</span>
+      <span class="overflow-hidden inline">خوش اومدی {{userFirstName}} :)</span>
       <mat-icon>person</mat-icon>
     </button>
   </div>

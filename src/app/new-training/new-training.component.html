@@ -12,7 +12,7 @@
     <span class="font-bold text-[17px]">{{ addedExercise.reps }}</span> تکرار
   </p>
   <p class="text-[15px] text-btnSecondColor">
-    {{ addedExercise.dateAdded | jalali }}
+    {{ addedExercise.dateAdded.toDate() | jalali }}
   </p>
   <div class="w-full flex flex-row justify-end items-center gap-x-3">
     <button
@@ -26,11 +26,11 @@
     <button
       class="text-green-600"
       matTooltip="شروع تمرین"
-      [routerLink]="['/training/', addedExercise.id, addedExercise.name]"
+      [routerLink]="['/training/', addedExercise.id]"
     >
       <mat-icon>play_circle</mat-icon>
     </button>
-    <button class="text-red-600" matTooltip="حذف تمرین">
+    <button class="text-red-600" matTooltip="حذف تمرین" (click)="delete()">
       <mat-icon>cancel</mat-icon>
     </button>
   </div>

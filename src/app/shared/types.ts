@@ -14,7 +14,7 @@ export type CompletedTrainingInfo = {
   name: string;
   sets: number;
   reps: number;
-  id?: string;
+  id: number;
 };
 
 export type NewTrainingInfo = {

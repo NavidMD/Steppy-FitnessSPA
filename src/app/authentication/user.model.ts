@@ -6,7 +6,7 @@ export interface UserSigningInfo {
 export interface UserAdditionalInfo {
   uid?: string;
   userName: string
-  fistName: string;
+  firstName: string;
   lastName: string;
   height: number;
   weight: number;

@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
   @Output() menuBtnClicked = new EventEmitter<void>();
   authStatus: boolean = false;
+  userFirstName!: string;
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -26,9 +27,14 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (sessionStorage.getItem('fake-token')) this.authStatus = true;
-    this.subscription = this.authService.authenticationStatus.subscribe({
-      next: (response) => (this.authStatus = response),
-    });
+    this.authService.authenticationStatus.subscribe({
+      next: (res) => {
+        this.authService.userIdSubject.subscribe({
+          next: value => this.userFirstName = value.firstName
+
+        })
+        this.authStatus = res;
+      }
+    })
   }
 }

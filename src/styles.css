@@ -19,6 +19,7 @@ body {
     no-repeat;
   background-size: cover;
 }
+
 @layer components {
   .twCustomSoftShadow {
     @apply shadow-[0px_2px_20px] shadow-black/15;
@@ -48,6 +49,19 @@ body {
   }
   mat-label {
     color: rgb(64, 64, 64);
+  }
+  .mat-mdc-snack-bar-label {
+    font-family: 'IRANSANSdn' !important;
+    font-size: 13px !important;
+    color: rgb(255, 235, 235) !important;
+  }
+  .mdc-snackbar__surface{
+    background-color: rgb(255, 85, 85) !important;
+    border-radius: 12px !important;
+  }
+  .mdc-button__label {
+    color: rgb(253, 253, 253) !important;
+    font-size: 13px !important;
   }
 }
 @utility scrollbarHide {

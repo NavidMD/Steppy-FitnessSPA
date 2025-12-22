@@ -14,7 +14,7 @@ export class LoginComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
   submitLogin(loginForm: NgForm) {
-
+    this.authService.login({email: loginForm.value.email, password: loginForm.value.password})
   }
 
 }

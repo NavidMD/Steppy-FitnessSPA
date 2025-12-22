@@ -12,6 +12,7 @@ export class AppComponent implements OnInit {
   @ViewChild('sidenav') sidenav!: MatSidenav;
   constructor(private authService: AuthService, private router: Router) { }
   authStatus: boolean = false;
+  userFirstName: string | null = 'نامشخض';
   title = 'fitness-app';
 
   loggingHandler() {
@@ -26,9 +27,13 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (sessionStorage.getItem('fake-token')) this.authStatus = true;
-    this.authService.authenticationStatus.subscribe({
-      next: response => this.authStatus = response,
+    this.authService.userIdSubject.subscribe({
+      next: (res) => {
+        if(res.uid) {
+          this.authStatus = true
+          this.userFirstName = res.firstName
+        }
+      }
     })
   }
 }

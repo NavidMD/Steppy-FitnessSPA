@@ -1,18 +1,18 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { CompletedTrainingInfo, TrainingInfo } from '../shared/types';
+import { CompletedTrainingInfo, NewTrainingInfo, TrainingInfo } from '../shared/types';
 import { MatStepper } from '@angular/material/stepper';
 import { MatDialog } from '@angular/material/dialog';
 import { StartModalComponent } from './start-modal/start-modal.component';
 import { Observable } from 'rxjs';
 import { GetTrainingsService } from '../shared/services/getTrainings.service';
+import { AuthService } from '../authentication/auth.service';
 
 @Component({
   selector: 'app-active-training',
   templateUrl: './active-training.component.html',
   styleUrl: './active-training.component.css',
 })
-
 export class ActiveTrainingComponent implements OnInit {
   @ViewChild('stepper') stepper!: MatStepper;
 
@@ -20,15 +20,17 @@ export class ActiveTrainingComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private dialog: MatDialog,
-    private trainingService: GetTrainingsService
+    private trainingService: GetTrainingsService,
+    private authService: AuthService
   ) {}
 
   //active exercise data
   reps: number = 0;
   sets: number[] = [];
-  name: string = 'نامشخص';
+  name: string = 'پلانک';
   exerciseId!: number;
   activeExerciseModel$!: Observable<TrainingInfo>;
+
   // spinner and interval data
   progressValue: number = 100;
   timePassed: number = 0;
@@ -69,20 +71,13 @@ export class ActiveTrainingComponent implements OnInit {
 
   addAsCompleted() {
     if (this.stepper.selectedIndex === this.sets.length - 1) {
-      let completedTrainings = JSON.parse(
-        localStorage.getItem('completedTrainings')!
-      );
       let completedExercise: CompletedTrainingInfo = {
         dateCompleted: new Date(),
         name: this.name,
         sets: this.sets.length,
         reps: this.reps,
+        id: this.exerciseId
       };
-      completedTrainings.push(completedExercise);
-      localStorage.setItem(
-        'completedTrainings',
-        JSON.stringify(completedTrainings)
-      );
       this.lastSetCompleted = true;
       this.trainingService.addToCompletedTrainingsDb(completedExercise);
       this.deleteActiveExercise();
@@ -113,35 +108,30 @@ export class ActiveTrainingComponent implements OnInit {
 
   //spinner buttons handlers
   deleteActiveExercise() {
-    let filteredTrainingsList = JSON.parse(
-      localStorage.getItem('newTrainings')!
-    ).filter((i: any) => i.id !== this.exerciseId);
-    localStorage.setItem('newTrainings', JSON.stringify(filteredTrainingsList));
+    if(this.exerciseId) {
+      this.trainingService.deleteNewTraining(this.exerciseId);
+    }
     this.router.navigate(['/training']);
   }
 
   ngOnInit(): void {
-    // getting added exercise id from url + finding added exercise object from local storage
+    // getting added exercise id from url
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.exerciseId = parseInt(params.get('id')!);
     });
-    if (JSON.parse(localStorage.getItem('newTrainings')!)) {
-      JSON.parse(localStorage.getItem('newTrainings')!).find((i: any) => {
-        if (i.id === this.exerciseId) {
-          this.reps = i.reps;
-          this.name = i.name;
-          // creating array from sets count for stepper
-          for (let set = 1; set <= i.sets; set++) {
-            this.sets.push(set);
+
+    this.authService.userIdSubject.subscribe({
+      next: (data) => {
+        const active = data.newTrainings.find((i:NewTrainingInfo) => i.id === this.exerciseId);
+        if (active) {
+          this.name = active.name;
+          this.reps = active.reps;
+          for (let i = 1; i <= active.sets; i++) {
+            this.sets.push(i);
           }
         }
-      });
-      // getting exercise model of added exercise for more info
-      this.activeExerciseModel$ = this.trainingService.getExerciseByName(
-        this.name
-      );
-    } else if (!localStorage.getItem('newTrainings')) {
-      this.router.navigate(['/training']);
-    }
+        this.activeExerciseModel$ = this.trainingService.getExerciseByName(this.name);
+      },
+    });
   }
 }

@@ -14,12 +14,12 @@ import { AuthService } from '../authentication/auth.service';
   templateUrl: './training.component.html',
   styleUrl: './training.component.css',
 })
-export class TrainingComponent implements OnInit, OnDestroy {
+export class TrainingComponent implements OnInit {
   constructor(
     private trainingService: GetTrainingsService,
     private authService: AuthService
   ) {}
-  subscription = new Subscription();
+
   //data from Firebase
   allExercises$!: Observable<TrainingInfo[]>;
   selectedExercise$!: Observable<TrainingInfo>;
@@ -30,10 +30,9 @@ export class TrainingComponent implements OnInit, OnDestroy {
   //mutable data that changes by user input
   private selectedName = new BehaviorSubject<string>('پلانک');
 
-  //new exercises data
-  newTrainings!: object[];
-  //completed Trainings from database
-  completedTrainings!: CompletedTrainingInfo[];
+  //data from database
+  newTrainings$!: Observable<object[]>;
+  completedTrainings$!: Observable<object[]>;
 
   //getting user input
   exercisePick(event: MatSelectChange) {
@@ -61,44 +60,31 @@ export class TrainingComponent implements OnInit, OnDestroy {
   }
 
   removeAllTrainings() {
-    if (localStorage.getItem('newTrainings')) {
-      localStorage.clear();
-      this.newTrainings = [];
-    } else {
-      alert('تمرین جدیدی وجود ندارد!');
-    }
+    this.trainingService.deleteAllNewTrainings();
   }
 
-  deleteFromHistory(id: string) {
-    this.trainingService.deleteItemFromDb('CompletedTrainings', id);
+  removeCompletedTraining(event: any) {
+    this.trainingService.deleteCompletedTraining(event.id);
   }
 
   ngOnInit(): void {
-    //getting user UID
-    this.authService.userIdSubject.subscribe((id) => (this.userId = id));
     //getting all models from database
     this.allExercises$ = this.trainingService.getExerciseModels();
     //getting realtime selected data from database
     this.selectedExercise$ = this.selectedName.pipe(
       switchMap((name) => this.trainingService.getExerciseByName(name))
     );
-
-    if (JSON.parse(localStorage.getItem('newTrainings') || '[]')) {
-      this.newTrainings = JSON.parse(
-        localStorage.getItem('newTrainings') || '[]'
-      );
-    }
-
-    //getting completed trainings from database
-    this.trainingService.getCompletedTrainingsDb();
-    this.subscription = this.trainingService.completedTrainingsFromDb.subscribe(
-      (data) => {
-        this.completedTrainings = data;
-      }
-    );
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    //getting user UID
+    this.authService.userIdSubject.subscribe({
+      next: (res) => {
+        res.uid ? (this.userId = res.uid) : null;
+        this.completedTrainings$ = this.trainingService.getCompletedTrainingsDb(
+          this.userId
+        );
+        this.newTrainings$ = this.trainingService.getNewTrainingsDb(
+          this.userId
+        );
+      },
+    });
   }
 }

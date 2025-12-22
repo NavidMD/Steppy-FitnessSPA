@@ -2,10 +2,12 @@ import { UserSigningInfo } from './user.model';
 import { UserAdditionalInfo } from './user.model';
 import { AuthData } from './auth.model';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject, map, of, Subject, switchMap } from 'rxjs';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { FirebaseErrorHandlingService } from '../shared/services/firebaseErrorHandling.service';
 
 @Injectable({
   providedIn: 'root',
@@ -13,16 +15,33 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 export class AuthService {
   private user: UserSigningInfo | null = null;
   authenticationStatus = new Subject<boolean>();
-  userIdSubject = new BehaviorSubject<any>('');
+  userIdSubject = new BehaviorSubject<any>(null);
 
   constructor(
     private router: Router,
     private firebaseAuth: AngularFireAuth,
-    private database: AngularFirestore
+    private database: AngularFirestore,
+    private snackbar: MatSnackBar,
+    private errorService: FirebaseErrorHandlingService
   ) {
-    this.firebaseAuth.authState.subscribe((user) => {
-      this.userIdSubject.next(user?.uid);
-    });
+    this.firebaseAuth.authState
+      .pipe(
+        switchMap((user) => {
+          if (user) {
+            this.authenticationStatus.next(true);
+            return this.database
+              .collection('Users')
+              .doc<UserAdditionalInfo>(user.uid)
+              .valueChanges();
+          } else {
+            this.authenticationStatus.next(false);
+            return of(null);
+          }
+        })
+      )
+      .subscribe((doc) => {
+        this.userIdSubject.next(doc ?? null);
+      });
   }
 
   register(registerData: UserSigningInfo, additionalData: UserAdditionalInfo) {
@@ -38,27 +57,35 @@ export class AuthService {
         console.log('User UID:', uid);
         additionalData.uid = uid;
         this.database.collection('Users').doc(uid).set(additionalData);
+        this.authenticationStatus.next(true);
+        this.router.navigate(['/']);
       })
-      .catch((error) => console.log(error));
-    this.authenticationStatus.next(true);
-    this.router.navigate(['/']);
+      .catch((error) => {
+        const errorMsg = this.errorService.getErrorMessage(error.code);
+        return this.snackbar.open(errorMsg,'متوجه شدم',{duration: 5000})
+      });
   }
 
   login(loginData: AuthData) {
-    if (
-      this.user &&
-      loginData.email === this.user.email &&
-      loginData.password === this.user.password
-    ) {
+    this.firebaseAuth.signInWithEmailAndPassword(loginData.email, loginData.password)
+    .then((credential) => {
       this.authenticationStatus.next(true);
-    } else this.authenticationStatus.next(false);
+      this.router.navigate(['/']);
+    })
+    .catch((error) => {
+        const errorMsg = this.errorService.getErrorMessage(error.code);
+        console.dir(error);
+        return this.snackbar.open(errorMsg,'متوجه شدم',{duration: 5000})
+      })
   }
 
   logout() {
-    this.user = null;
-    this.authenticationStatus.next(false);
-    sessionStorage.clear();
-    localStorage.clear();
+    this.firebaseAuth.signOut().then(() => {
+      this.user = null;
+      this.authenticationStatus.next(false);
+      this.userIdSubject.next({ uid: null, firstName: null });
+      this.router.navigate(['/login']);
+    });
   }
 
   getUser() {
@@ -66,6 +93,6 @@ export class AuthService {
   }
 
   isAuthenticated() {
-    return !!this.userIdSubject;
+    return this.firebaseAuth.authState.pipe(map((user) => !!user));
   }
 }

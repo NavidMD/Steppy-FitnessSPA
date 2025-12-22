@@ -27,7 +27,7 @@ export class SignupComponent {
   submitSignUpForm(signupForm: NgForm,physicalInfoForm: NgForm) {
     const userPhysicalInfo = {
       userName: signupForm.value.username,
-      fistName: physicalInfoForm.value.firstName,
+      firstName: physicalInfoForm.value.firstName,
       lastName: physicalInfoForm.value.lastName,
       height: physicalInfoForm.value.height,
       weight: physicalInfoForm.value.weight,
