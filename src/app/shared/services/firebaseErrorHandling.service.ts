@@ -8,7 +8,7 @@ export class FirebaseErrorHandlingService {
   constructor(){}
 
   getErrorMessage(errorCode: string) {
-     switch (JSON.stringify(errorCode)) {
+     switch (errorCode) {
       case 'auth/email-already-in-use':
         return 'این ایمیل قبلاً ثبت شده است.';
       case 'auth/invalid-email':
@@ -23,6 +23,8 @@ export class FirebaseErrorHandlingService {
         return 'تلاش‌های زیادی انجام شده، لطفاً بعداً دوباره امتحان کنید.';
       case 'auth/network-request-failed':
         return 'مشکل در اتصال اینترنت .';
+      case 'auth/invalid-credential':
+        return 'اطلاعات وارد شده (ایمیل یا رمزعبور) معتبر نیست.';
       default:
         return 'خطای ناشناخته‌ای رخ داده است.';
     }

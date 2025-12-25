@@ -1,129 +1,141 @@
 <div
-  class="w-full min-h-[calc(100vh-84px)] flex flex-row justify-between items-start gap-x-4 px-3"
+  class="w-full min-h-[calc(100vh-84px)] flex flex-row justify-center items-start gap-x-4 px-3"
 >
-  <div id="exerciseControls" class="w-2/3 h-full">
-    <mat-stepper linear labelPosition="bottom" animationDuration="500" #stepper>
-      <mat-step
-        *ngFor="let set of sets; let isLast = last; let isFirst = first"
-        completed="false"
+  <ng-container *ngIf="activeExerciseModel$ | async">
+    <div id="exerciseControls" class="w-2/3 h-full">
+      <mat-stepper
+        linear
+        labelPosition="bottom"
+        animationDuration="500"
+        #stepper
       >
-        <div
-          id="controls"
-          class="w-full flex flex-row items-center justify-right gap-x-2"
+        <mat-step
+          *ngFor="let set of sets; let isLast = last; let isFirst = first"
+          completed="false"
         >
-          <button
-            id="previous-btn"
-            class="w-full rounded-xl cursor-pointer bg-btnSecondColor shadow-md hover:shadow-sm shadow-black/30"
-            *ngIf="!isFirst"
-            matButton
-            matStepperPrevious
+          <div
+            id="controls"
+            class="w-full flex flex-row items-center justify-right gap-x-2"
           >
-            ست قبلی
-          </button>
-          <button
-            routerLink="/training"
-            id="exercises-list"
-            class="w-full rounded-xl cursor-pointer bg-btnSecondColor shadow-md hover:shadow-sm transition shadow-black/30"
-            matButton
-          >
-            تمرین های من
-          </button>
-          <button
-            (click)="deleteActiveExercise()"
-            id="delete-exercise"
-            class="w-full rounded-xl cursor-pointer bg-red-400 hover:bg-red-500 transition shadow-md hover:shadow-sm shadow-black/30"
-            matButton
-          >
-            حذف تمرین
-          </button>
-          <button
-            *ngIf="isLast && lastSetCompleted"
-            id="done-exercise"
-            class="w-full rounded-xl cursor-pointer bg-green-600 shadow-md hover:shadow-sm shadow-black/30"
-            matButton
-          >
-            انجام شد
-          </button>
-        </div>
-        <ng-template matStepLabel>{{ reps }} تکرار </ng-template>
-        <ng-template matStepContent>
-          <div class="w-full relative twFlexCentering">
-            <mat-progress-spinner
-              [color]="timerActivated ? 'accent' : 'primary'"
-              mode="determinate"
-              [value]="progressValue"
-              diameter="280"
-              strokeWidth="5"
-            >
-            </mat-progress-spinner>
             <button
-              *ngIf="!timerActivated"
-              class="start"
-              (click)="executeDialog()"
+              id="previous-btn"
+              class="w-full rounded-xl cursor-pointer bg-btnSecondColor shadow-md hover:shadow-sm shadow-black/30"
+              *ngIf="!isFirst"
+              matButton
+              matStepperPrevious
             >
-              شروع <span class="text-[18px]">{{ timer }}</span>
+              ست قبلی
             </button>
             <button
-              *ngIf="timerActivated"
-              class="stop animate-pulse"
-              (click)="stop()"
+              routerLink="/training"
+              id="exercises-list"
+              class="w-full rounded-xl cursor-pointer bg-btnSecondColor shadow-md hover:shadow-sm transition shadow-black/30"
+              matButton
             >
-              توقف <span class="text-[18px]">{{ timer }}</span>
+              تمرین های من
+            </button>
+            <button
+              (click)="deleteActiveExercise()"
+              id="delete-exercise"
+              class="w-full rounded-xl cursor-pointer bg-red-400 hover:bg-red-500 transition shadow-md hover:shadow-sm shadow-black/30"
+              matButton
+            >
+              حذف تمرین
+            </button>
+            <button
+              *ngIf="isLast && lastSetCompleted"
+              id="done-exercise"
+              class="w-full rounded-xl cursor-pointer bg-green-600 shadow-md hover:shadow-sm shadow-black/30"
+              matButton
+            >
+              انجام شد
             </button>
           </div>
-        </ng-template>
-      </mat-step>
-    </mat-stepper>
-  </div>
-  <div id="infoSideCard" class="w-1/3 h-full">
-    <mat-card>
-      <img [src]="'../../assets/vectors/' + name + '.png'" alt="" />
-      <mat-card-content>
-        <mat-card-title>
-          {{ name }}
-          <span
-            class="rounded-xl"
-            id="level"
-            [ngClass]="{
-              hard: (activeExerciseModel$ | async)?.hardness === 'سخت',
-              normal: (activeExerciseModel$ | async)?.hardness === 'متوسط',
-              easy: (activeExerciseModel$ | async)?.hardness === 'آسان'
-            }"
+          <ng-template matStepLabel>{{ reps }} تکرار </ng-template>
+          <ng-template matStepContent>
+            <div class="w-full relative twFlexCentering">
+              <mat-progress-spinner
+                [color]="timerActivated ? 'accent' : 'primary'"
+                mode="determinate"
+                [value]="progressValue"
+                diameter="280"
+                strokeWidth="5"
+              >
+              </mat-progress-spinner>
+              <button
+                *ngIf="!timerActivated"
+                class="start"
+                (click)="executeDialog()"
+              >
+                شروع <span class="text-[18px]">{{ timer }}</span>
+              </button>
+              <button
+                *ngIf="timerActivated"
+                class="stop animate-pulse"
+                (click)="stop()"
+              >
+                توقف <span class="text-[18px]">{{ timer }}</span>
+              </button>
+            </div>
+          </ng-template>
+        </mat-step>
+      </mat-stepper>
+    </div>
+    <div id="infoSideCard" class="w-1/3 h-full min-h-[700px]">
+      <mat-card class="min-h-[700px]">
+        <img [src]="'../../assets/vectors/' + name + '.png'" alt="" />
+        <mat-card-content>
+          <mat-card-title>
+            {{ name }}
+            <span
+              class="rounded-xl"
+              id="level"
+              [ngClass]="{
+                hard: (activeExerciseModel$ | async)?.hardness === 'سخت',
+                normal: (activeExerciseModel$ | async)?.hardness === 'متوسط',
+                easy: (activeExerciseModel$ | async)?.hardness === 'آسان'
+              }"
+            >
+              <span>{{ (activeExerciseModel$ | async)?.hardness }}</span>
+            </span>
+          </mat-card-title>
+          <ul
+            class="w-full h-auto flex flex-col items-start gap-y-3 pl-1 mb-[15px] text-gray-700"
           >
-            <span>{{ (activeExerciseModel$ | async)?.hardness }}</span>
-          </span>
-        </mat-card-title>
-        <ul
-          class="w-full h-auto flex flex-col items-start gap-y-3 pl-1 mb-[15px] text-gray-700"
-        >
-          <li id="muscleTarget">
-            عضلات هدف: <span>{{ (activeExerciseModel$ | async)?.target }}</span>
-          </li>
-          <li id="muscleWeakness">
-            نقاط ضعف:
-            <span>{{ (activeExerciseModel$ | async)?.weakness }}</span>
-          </li>
-          <li id="setCounts">
-            تعداد ست: <span>{{ sets.length }}</span>
-          </li>
-          <li id="repCounts">
-            تعداد تکرار: <span>{{ reps }}</span>
-          </li>
-        </ul>
-        <p class="w-full leading-6 text-[14px] text-justify text-gray-700">
-          {{ (activeExerciseModel$ | async)?.description }}
-        </p>
-        <button
-          id="exerciseInfo"
-          class="w-full h-[44px] bg-btnSecondColor rounded-xl text-white shadow-md shadow-black/30 hover:shadow-sm transition cursor-pointer"
-        >
-          <a
-            class="w-full twFlexCentering"
-            [href]="'https://fitamin.ir/mag/movement/' + name + '/'"
-            >آموزش حرکت {{ name }}</a
+            <li id="muscleTarget">
+              عضلات هدف:
+              <span>{{ (activeExerciseModel$ | async)?.target }}</span>
+            </li>
+            <li id="muscleWeakness">
+              نقاط ضعف:
+              <span>{{ (activeExerciseModel$ | async)?.weakness }}</span>
+            </li>
+            <li id="setCounts">
+              تعداد ست: <span>{{ sets.length }}</span>
+            </li>
+            <li id="repCounts">
+              تعداد تکرار: <span>{{ reps }}</span>
+            </li>
+          </ul>
+          <p class="w-full leading-6 text-[14px] text-justify text-gray-700">
+            {{ (activeExerciseModel$ | async)?.description }}
+          </p>
+          <button
+            id="exerciseInfo"
+            class="w-full h-[44px] bg-btnSecondColor rounded-xl text-white shadow-md shadow-black/30 hover:shadow-sm transition cursor-pointer"
           >
-        </button>
-      </mat-card-content>
-    </mat-card>
-  </div>
+            <a
+              class="w-full twFlexCentering"
+              [href]="'https://fitamin.ir/mag/movement/' + name + '/'"
+              >آموزش حرکت {{ name }}</a
+            >
+          </button>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </ng-container>
+  <app-http-loading
+    message="درحال بارگذاری اطلاعات تمرین "
+    *ngIf="!(activeExerciseModel$ | async)"
+  ></app-http-loading>
 </div>

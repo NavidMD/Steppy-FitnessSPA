@@ -1,20 +1,33 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnDestroy, ViewChild } from '@angular/core';
 import { AuthService } from '../auth.service';
-import { Router } from '@angular/router';
 import { NgForm, NgModel } from '@angular/forms';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrl: './login.component.css',
 })
-export class LoginComponent {
+export class LoginComponent implements OnDestroy {
   @ViewChild('passwordInput') password!: NgModel;
   hidePassword: boolean = true;
-  constructor(private authService: AuthService, private router: Router) {}
+  spinnerActive: boolean = false;
 
-  submitLogin(loginForm: NgForm) {
-    this.authService.login({email: loginForm.value.email, password: loginForm.value.password})
+  subscription!: Subscription;
+
+  constructor(private authService: AuthService) {}
+
+  async submitLogin(loginForm: NgForm) {
+    this.spinnerActive = true;
+    await this.authService
+      .login({
+        email: loginForm.value.email,
+        password: loginForm.value.password,
+      })
+      .then(() => (this.spinnerActive = false));
   }
 
+  ngOnDestroy(): void {
+    if (this.subscription) this.subscription.unsubscribe();
+  }
 }

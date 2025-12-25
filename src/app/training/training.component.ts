@@ -1,11 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatSelect, MatSelectChange } from '@angular/material/select';
 import {
-  CompletedTrainingInfo,
   NewTrainingInfo,
   TrainingInfo,
 } from '../shared/types';
-import { BehaviorSubject, Observable, Subscription, switchMap } from 'rxjs';
+import { BehaviorSubject, Observable, switchMap } from 'rxjs';
 import { GetTrainingsService } from '../shared/services/getTrainings.service';
 import { AuthService } from '../authentication/auth.service';
 

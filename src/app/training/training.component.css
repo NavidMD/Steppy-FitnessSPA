@@ -36,7 +36,7 @@ mat-option {
   padding: 14px;
   display: flex;
   flex-direction: row-reverse;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   border-radius: 20px;
   box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.199);

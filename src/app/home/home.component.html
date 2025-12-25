@@ -227,9 +227,9 @@
     </div>
     <div
       [ngClass]="exerciseSectionObserved ? 'flex' : 'hidden'"
-      class="w-6/12 h-full flex flex-col animate-fadeInRight justify-between items-start text-gray-700"
+      class="w-6/12 h-full flex flex-col animate-fadeInRight justify-between items-center text-gray-700"
     >
-      <p class="text-3xl font-bold text-headingsColor/85 pb-2">
+      <p class="text-3xl text-right w-full font-bold text-headingsColor/85 pb-2">
         تمرین خودتو بساز!
       </p>
       <p class="text-[16px] leading-8">
@@ -237,9 +237,9 @@
         شدت های مختلف میتونی تمرین خودتو بسازی و تو بخش تمرین های من پیشرفتت رو
         تو اون تمرین ببینی.
       </p>
-      <mat-tab-group>
+      <mat-tab-group *ngIf="allExercises$ | async as allExercises">
         <mat-tab
-          *ngFor="let exercise of allExercises$ | async"
+          *ngFor="let exercise of allExercises"
           [label]="exercise['exerciseName']"
         >
           <div id="mat-tab-wrapper">
@@ -279,6 +279,7 @@
           </div>
         </mat-tab>
       </mat-tab-group>
+      <app-http-loading message="درحال بارگذاری تمرین ها" *ngIf="!(allExercises$ | async)?.length" ></app-http-loading>
     </div>
   </section>
 </div>

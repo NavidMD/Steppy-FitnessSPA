@@ -10,7 +10,7 @@ mat-stepper {
   justify-content: space-between;
 }
 ::ng-deep .mat-horizontal-content-container {
-  padding-bottom: 25px !important;
+  padding-bottom: 20px !important;
   padding-right: 32px !important;
 }
 ::ng-deep .mat-horizontal-stepper-header-container {

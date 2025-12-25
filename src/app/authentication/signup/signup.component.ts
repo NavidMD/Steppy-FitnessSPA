@@ -1,30 +1,35 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnDestroy, ViewChild } from '@angular/core';
 import { NgForm, NgModel } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { MatStepper } from '@angular/material/stepper';
-import { timestamp } from 'rxjs';
 import moment from 'jalali-moment';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css',
 })
-export class SignupComponent {
+export class SignupComponent implements OnDestroy {
   @ViewChild('passwordInput') password!: NgModel;
   @ViewChild('signupStepper') stepper!: MatStepper;
   @ViewChild('signupForm') signupForm!: NgForm;
   hidePassword: boolean = true;
+
+  spinnerActive: boolean = false;
+  subscription!: Subscription;
+
   constructor(private authService: AuthService) {}
 
   goToNextStep() {
-    if(this.signupForm.valid) {
+    if (this.signupForm.valid) {
       this.stepper.selected!.completed = true;
       this.stepper.next();
     }
   }
 
-  submitSignUpForm(signupForm: NgForm,physicalInfoForm: NgForm) {
+  async submitSignUpForm(signupForm: NgForm, physicalInfoForm: NgForm) {
+    this.spinnerActive = true;
     const userPhysicalInfo = {
       userName: signupForm.value.username,
       firstName: physicalInfoForm.value.firstName,
@@ -32,13 +37,20 @@ export class SignupComponent {
       height: physicalInfoForm.value.height,
       weight: physicalInfoForm.value.weight,
       age: physicalInfoForm.value.age,
-      dateOfBirth: moment(signupForm.value.dateOfBirth).format("YYYY-MM-DD"),
-      gender: physicalInfoForm.value.gender
-    }
-    this.authService.register({
-      email: signupForm.value.email,
-      password: signupForm.value.password,
-    },userPhysicalInfo)
+      dateOfBirth: moment(signupForm.value.dateOfBirth).format('YYYY-MM-DD'),
+      gender: physicalInfoForm.value.gender,
+    };
+    await this.authService
+      .register(
+        {
+          email: signupForm.value.email,
+          password: signupForm.value.password,
+        },
+        userPhysicalInfo
+      )
+      .then((result) => {
+        this.spinnerActive = false;
+      })
   }
 
   passwordCheck() {
@@ -50,5 +62,9 @@ export class SignupComponent {
     ) {
       return this.password.control.setErrors({ passwordPattern: true });
     }
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) this.subscription.unsubscribe();
   }
 }

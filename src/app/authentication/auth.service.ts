@@ -44,8 +44,8 @@ export class AuthService {
       });
   }
 
-  register(registerData: UserSigningInfo, additionalData: UserAdditionalInfo) {
-    this.firebaseAuth
+  async register(registerData: UserSigningInfo, additionalData: UserAdditionalInfo) {
+    return this.firebaseAuth
       //Create user in AuthenticationDb
       .createUserWithEmailAndPassword(
         registerData.email.trim(),
@@ -59,24 +59,28 @@ export class AuthService {
         this.database.collection('Users').doc(uid).set(additionalData);
         this.authenticationStatus.next(true);
         this.router.navigate(['/']);
+        return true;
       })
       .catch((error) => {
         const errorMsg = this.errorService.getErrorMessage(error.code);
-        return this.snackbar.open(errorMsg,'متوجه شدم',{duration: 5000})
+        this.snackbar.open(errorMsg, 'متوجه شدم', { duration: 5000 });
+        return false;
       });
   }
 
-  login(loginData: AuthData) {
-    this.firebaseAuth.signInWithEmailAndPassword(loginData.email, loginData.password)
-    .then((credential) => {
-      this.authenticationStatus.next(true);
-      this.router.navigate(['/']);
-    })
-    .catch((error) => {
-        const errorMsg = this.errorService.getErrorMessage(error.code);
-        console.dir(error);
-        return this.snackbar.open(errorMsg,'متوجه شدم',{duration: 5000})
+  async login(loginData: AuthData) {
+    return this.firebaseAuth
+      .signInWithEmailAndPassword(loginData.email, loginData.password)
+      .then((credential) => {
+        this.authenticationStatus.next(true);
+        this.router.navigate(['/']);
+        return true;
       })
+      .catch((error) => {
+        const errorMsg = this.errorService.getErrorMessage(error.code);
+        this.snackbar.open(errorMsg, 'متوجه شدم', { duration: 5000 });
+        return false;
+      });
   }
 
   logout() {

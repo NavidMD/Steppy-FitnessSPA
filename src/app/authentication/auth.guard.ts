@@ -9,6 +9,7 @@ import { map, Observable } from "rxjs";
 })
 export class PermissionService {
   constructor(private router: Router, private auth: AngularFireAuth) {}
+    // A Guard for authorization when user has not signed in
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     return this.auth.authState.pipe(
       map(user => {

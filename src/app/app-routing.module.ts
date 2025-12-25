@@ -7,6 +7,7 @@ import { TrainingComponent } from './training/training.component';
 import { ActiveTrainingComponent } from './active-training/active-training.component';
 import { AuthGuard, PermissionService } from './authentication/auth.guard';
 import { FormStrictionService } from './authentication/form.guard';
+import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 
 const routes: Routes = [
   { path: 'training/:id', component: ActiveTrainingComponent, canActivate: [AuthGuard] },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent, canActivate: [FormStrictionService]},
   { path: 'login', component: LoginComponent, canActivate: [FormStrictionService] },
   { path: '', component: HomeComponent },
+  { path: '**', component: NotFoundPageComponent}
 ];
 
 @NgModule({

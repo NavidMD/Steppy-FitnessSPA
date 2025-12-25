@@ -9,6 +9,7 @@ import { map, Observable, take } from "rxjs";
 })
 export class FormStrictionService {
   constructor(private router: Router, private auth: AngularFireAuth) {}
+  // A Guard for multiple sign in and login striction after user signed in
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     return this.auth.authState.pipe(
       take(1),

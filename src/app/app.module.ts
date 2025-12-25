@@ -27,6 +27,7 @@ import { firebaseConfig } from '../environment';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 //date adapter
 import { MaterialPersianDateAdapter, PERSIAN_DATE_FORMATS } from './material.persian-date.adapter';
+import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 
 
 
@@ -42,7 +43,8 @@ import { MaterialPersianDateAdapter, PERSIAN_DATE_FORMATS } from './material.per
     HeaderComponent,
     FooterComponent,
     ActiveTrainingComponent,
-    StartModalComponent
+    StartModalComponent,
+    NotFoundPageComponent
   ],
   imports: [
     BrowserModule,
