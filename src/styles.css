@@ -22,7 +22,7 @@ body {
 
 @layer components {
   .twCustomSoftShadow {
-    @apply shadow-[0px_2px_20px] shadow-black/15;
+    @apply shadow-[0px_3px_10px] shadow-black/15;
   }
   .twTextGradient {
     @apply bg-linear-to-r from-[#ab6700] to-blue-500 bg-clip-text text-transparent;
@@ -58,6 +58,7 @@ body {
   .mdc-snackbar__surface{
     background-color: rgb(255, 85, 85) !important;
     border-radius: 12px !important;
+
   }
   .mdc-button__label {
     color: rgb(253, 253, 253) !important;

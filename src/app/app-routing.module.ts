@@ -8,19 +8,37 @@ import { ActiveTrainingComponent } from './active-training/active-training.compo
 import { AuthGuard, PermissionService } from './authentication/auth.guard';
 import { FormStrictionService } from './authentication/form.guard';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
+import { DashboardLayoutComponent } from './dashboard/dashboard-layout/dashboard-layout.component';
 
 const routes: Routes = [
-  { path: 'training/:id', component: ActiveTrainingComponent, canActivate: [AuthGuard] },
+  {
+    path: 'training/:id',
+    component: ActiveTrainingComponent,
+    canActivate: [AuthGuard],
+  },
   { path: 'training', component: TrainingComponent, canActivate: [AuthGuard] },
-  { path: 'signup', component: SignupComponent, canActivate: [FormStrictionService]},
-  { path: 'login', component: LoginComponent, canActivate: [FormStrictionService] },
+  {
+    path: 'dashboard',
+    component: DashboardLayoutComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'signup',
+    component: SignupComponent,
+    canActivate: [FormStrictionService],
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+    canActivate: [FormStrictionService],
+  },
   { path: '', component: HomeComponent },
-  { path: '**', component: NotFoundPageComponent}
+  { path: '**', component: NotFoundPageComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers: [PermissionService, FormStrictionService]
+  providers: [PermissionService, FormStrictionService],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

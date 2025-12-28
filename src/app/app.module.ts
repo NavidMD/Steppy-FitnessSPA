@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -28,7 +28,9 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 //date adapter
 import { MaterialPersianDateAdapter, PERSIAN_DATE_FORMATS } from './material.persian-date.adapter';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
-
+import { DashboardLayoutComponent } from './dashboard/dashboard-layout/dashboard-layout.component';
+import { DashboardUserPanelComponent } from './dashboard/dashboard-user-panel/dashboard-user-panel.component';
+import { DashboardStaticsPanelComponent } from './dashboard/dashboard-statics-panel/dashboard-statics-panel.component';
 
 
 @NgModule({
@@ -44,7 +46,10 @@ import { NotFoundPageComponent } from './not-found-page/not-found-page.component
     FooterComponent,
     ActiveTrainingComponent,
     StartModalComponent,
-    NotFoundPageComponent
+    NotFoundPageComponent,
+    DashboardLayoutComponent,
+    DashboardUserPanelComponent,
+    DashboardStaticsPanelComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +66,7 @@ import { NotFoundPageComponent } from './not-found-page/not-found-page.component
   providers: [
     provideAnimationsAsync(),
     {provide: DateAdapter, useClass: MaterialPersianDateAdapter, deps: [MAT_DATE_LOCALE]},
-    {provide: MAT_DATE_FORMATS, useValue: PERSIAN_DATE_FORMATS}
+    {provide: MAT_DATE_FORMATS, useValue: PERSIAN_DATE_FORMATS},
   ],
   bootstrap: [AppComponent]
 })
