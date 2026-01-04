@@ -4,7 +4,7 @@ import {
   NewTrainingInfo,
   TrainingInfo,
 } from '../shared/types';
-import { BehaviorSubject, Observable, switchMap } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription, switchMap, take } from 'rxjs';
 import { GetTrainingsService } from '../shared/services/getTrainings.service';
 import { AuthService } from '../authentication/auth.service';
 
@@ -18,7 +18,7 @@ export class TrainingComponent implements OnInit {
     private trainingService: GetTrainingsService,
     private authService: AuthService
   ) {}
-
+  subscription!: Subscription;
   //data from Firebase
   allExercises$!: Observable<TrainingInfo[]>;
   selectedExercise$!: Observable<TrainingInfo>;
@@ -47,14 +47,21 @@ export class TrainingComponent implements OnInit {
       let newSetCount = sets.value;
       let newRepCount = reps.value;
       let dateAdded = new Date();
-      const newExercise: NewTrainingInfo = {
-        id: Date.now(),
-        name: newExerciseName,
-        sets: newSetCount,
-        reps: newRepCount,
-        dateAdded,
-      };
-      this.trainingService.addToNewTrainingsDb(newExercise, this.userId);
+      this.selectedExercise$.pipe(take(1)).subscribe({
+        next: (exercise) => {
+          const newExercise: NewTrainingInfo = {
+            id: Date.now(),
+            name: newExerciseName,
+            sets: newSetCount,
+            reps: newRepCount,
+            dateAdded,
+            type: exercise.type!,
+            secondPerRep: exercise.secondPerRep!,
+            caloriePerSet: exercise.caloriePerSet!
+          };
+          this.trainingService.addToNewTrainingsDb(newExercise, this.userId);
+        }
+      })
     }
   }
 

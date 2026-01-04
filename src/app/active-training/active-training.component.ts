@@ -25,9 +25,13 @@ export class ActiveTrainingComponent implements OnInit {
   ) {}
 
   //active exercise data
+  type!: string;
+  caloriePerSet: number = 0;
+  secondPerRep: number = 0;
   reps: number = 0;
   sets: number[] = [];
   name: string = 'پلانک';
+  timeRequired: number = 0;
   exerciseId!: number;
   activeExerciseModel$!: Observable<TrainingInfo>;
 
@@ -47,8 +51,8 @@ export class ActiveTrainingComponent implements OnInit {
     this.interval = setInterval(() => {
       this.timePassed++;
       this.timer = `00:${String(this.timePassed).padStart(2, '0')}`;
-      this.progressValue = (this.timePassed / 60) * 100;
-      if (this.timePassed >= 60) {
+      this.progressValue = (this.timePassed / this.timeRequired) * 100;
+      if (this.timePassed >= this.timeRequired) {
         this.stop();
         this.reset();
         this.stepper.selected!.completed = true;
@@ -76,7 +80,10 @@ export class ActiveTrainingComponent implements OnInit {
         name: this.name,
         sets: this.sets.length,
         reps: this.reps,
-        id: this.exerciseId
+        id: this.exerciseId,
+        type: this.type,
+        caloriesBurned: (this.caloriePerSet * this.sets.length),
+        totalSeconds: (this.reps * this.secondPerRep) * this.sets.length
       };
       this.lastSetCompleted = true;
       this.trainingService.addToCompletedTrainingsDb(completedExercise);
@@ -126,6 +133,10 @@ export class ActiveTrainingComponent implements OnInit {
         if (active) {
           this.name = active.name;
           this.reps = active.reps;
+          this.type = active.type;
+          this.secondPerRep = active.secondPerRep;
+          this.caloriePerSet = active.caloriePerSet;
+          this.timeRequired = active.secondPerRep * active.reps
           for (let i = 1; i <= active.sets; i++) {
             this.sets.push(i);
           }

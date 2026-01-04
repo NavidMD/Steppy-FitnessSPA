@@ -2,23 +2,24 @@
   <mat-sidenav #sidenav>
     <div class="w-full h-full overflow-hidden flex flex-col justify-start">
       <section
-        class="w-full bg-sideNavHeaderColor rounded-2xl h-fit flex flex-row justify-between items-center px-4 py-2 mb-4">
-        <div class="w-fit flex flex-row justify-end items-center">
-          <button class="flex justify-center items-center bg-white p-2.5 twGradientButton rounded-xl">
-            <mat-icon>account_circle</mat-icon>
-          </button>
-          <div class="w-max h-full flex flex-col justify-center items-start px-4">
-            <p class="pt-2.5 font-bold">{{ authStatus ? 'خوش آمدید' : 'نامشخص'}}</p>
-            <p>{{ authStatus? 'عضو دائم' : 'عضو نشده' }}</p>
-          </div>
-        </div>
-        <button (click)="loggingHandler()" [ngClass]="authStatus? 'bg-red-500/90':'bg-blue-500/90'" class="flex justify-center items-center p-2.5 text-white twGradientButton rounded-full">
-          <mat-icon>
-            {{ authStatus ? 'power_settings_new' : 'person_add_alt'}}
-          </mat-icon>
+        class="w-full bg-sideNavHeaderColor rounded-2xl h-20 flex flex-row justify-center items-center px-4 mb-4 gap-3"
+      >
+        <button
+          (click)="loggingHandler()"
+          class="flex justify-center items-center bg-white p-2 twGradientButton rounded-xl"
+        >
+          <mat-icon>{{ authStatus ? "account_circle" : "add" }}</mat-icon>
         </button>
+        <p
+          class="h-full w-full flex justify-start items-center text-[15px] font-bold"
+        >
+          {{ authStatus ? "خوش آمدید،" : "ورود / ثبت نام" }}
+          <span *ngIf="authStatus">{{ userFirstName }}</span>
+        </p>
       </section>
-      <section class="w-full border-t border-gray-300 h-fit flex flex-col justify-between items-start py-3 px-4">
+      <section
+        class="w-full border-t border-gray-300 h-fit flex flex-col justify-between items-start py-3 px-4"
+      >
         <p class="text-lg">خدمات</p>
         <ul class="py-2">
           <li><mat-icon>event</mat-icon>برنامه های تمرینی</li>
@@ -26,7 +27,9 @@
           <li><mat-icon>co_present</mat-icon>مربیان</li>
         </ul>
       </section>
-      <section class="w-full border-t border-gray-300 h-fit flex flex-col justify-between items-start py-3 px-4">
+      <section
+        class="w-full border-t border-gray-300 h-fit flex flex-col justify-between items-start py-3 px-4"
+      >
         <p class="text-lg">داشبورد</p>
         <ul class="py-2">
           <li><mat-icon>checklist_rtl</mat-icon>برنامه های تمرینی من</li>
@@ -35,7 +38,9 @@
           <li><mat-icon>insights</mat-icon>روند پیشرفت</li>
         </ul>
       </section>
-      <section class="w-full border-t border-gray-300 h-fit flex flex-col justify-between items-start py-3 px-4">
+      <section
+        class="w-full border-t border-gray-300 h-fit flex flex-col justify-between items-start py-3 px-4"
+      >
         <p class="text-lg">تنظیمات</p>
         <ul class="py-2">
           <li><mat-icon>settings</mat-icon>تنظمات برنامه</li>

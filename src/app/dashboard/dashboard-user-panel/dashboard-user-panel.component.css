@@ -14,6 +14,7 @@ ul li {
   justify-content: start;
   align-items: center;
   gap: 20px;
+  
 }
 ul li mat-icon {
   color: #5199c9;

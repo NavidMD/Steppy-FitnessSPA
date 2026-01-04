@@ -41,22 +41,22 @@
 #infoSideCard #level {
   display: block;
   font-weight: 400;
-  font-size: 15px;
+  font-size: 14px;
   padding: 0px 15px;
   color: white;
 }
 #infoSideCard #level.hard {
-  background-color: rgba(255, 75, 75, 0.7);
+  background-color: rgba(255, 75, 75, 0.6);
 }
 #infoSideCard #level.normal {
-  background-color: rgb(75, 75, 255, 0.7);
+  background-color: rgb(75, 75, 255, 0.6);
 }
 #infoSideCard #level.easy {
-  background-color: rgb(65, 154, 65, 0.7);
+  background-color: rgb(65, 154, 65, 0.6);
 }
 #infoSideCard mat-card ul li {
   padding: 0;
-  font-size: 15px;
+  font-size: 14px;
   text-align: right;
   width: 100%;
   display: flex;
@@ -99,10 +99,14 @@ mat-card ul #setCounts::before {
 mat-card ul #repCounts::before {
   background-image: url("../../assets/vectors/countdown.svg");
 }
+mat-card ul #calories::before {
+  background-image: url("../../assets/vectors/aim.png");
+}
 #repCounts span,
-#setCounts span {
-  font-size: 18px;
-  font-weight: bold;
+#setCounts span,
+#calories span {
+  font-family: 'IRANSANSdn';
+  font-weight: 500;
 }
 
 #exerciseControls mat-stepper {

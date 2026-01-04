@@ -91,16 +91,16 @@
               class="rounded-xl"
               id="level"
               [ngClass]="{
-                hard: (activeExerciseModel$ | async)?.hardness === 'سخت',
-                normal: (activeExerciseModel$ | async)?.hardness === 'متوسط',
-                easy: (activeExerciseModel$ | async)?.hardness === 'آسان'
+                hard: (activeExerciseModel$ | async)?.type === 'قدرتی',
+                normal: (activeExerciseModel$ | async)?.type === 'ایزومتریک',
+                easy: (activeExerciseModel$ | async)?.type === 'هوازی'
               }"
             >
-              <span>{{ (activeExerciseModel$ | async)?.hardness }}</span>
+              <span>{{ (activeExerciseModel$ | async)?.type }}</span>
             </span>
           </mat-card-title>
           <ul
-            class="w-full h-auto flex flex-col items-start gap-y-3 pl-1 mb-[15px] text-gray-700"
+            class="w-full h-auto flex flex-col items-start gap-y-4 pl-1 mb-[15px] text-gray-700"
           >
             <li id="muscleTarget">
               عضلات هدف:
@@ -111,10 +111,13 @@
               <span>{{ (activeExerciseModel$ | async)?.weakness }}</span>
             </li>
             <li id="setCounts">
-              تعداد ست: <span>{{ sets.length }}</span>
+              تعداد ست: <span class="text-[15px]">{{ sets.length }}</span>
             </li>
             <li id="repCounts">
-              تعداد تکرار: <span>{{ reps }}</span>
+              تعداد تکرار: <span class="text-[15px]">{{ reps }}</span>
+            </li>
+            <li id="calories">
+              کالری سوزانده شده در هر ست: <span class="tex-sm">{{ (activeExerciseModel$ | async)?.caloriePerSet }} کالری</span>
             </li>
           </ul>
           <p class="w-full leading-6 text-[14px] text-justify text-gray-700">

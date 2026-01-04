@@ -39,10 +39,10 @@
     class="w-full h-fit flex flex-row justify-center items-center"
   >
     <div class="w-10/12 h-full rounded-4xl flex flex-col items-center">
-      <div class="w-1/4 h-full twFlexCentering flex-col text-gray-600 mb-5">
-        <p class="text-3xl font-bold text-headingsColor/85">
+      <div class="w-1/4 h-full twFlexCentering flex-col text-gray-600 mb-4">
+        <p class="text-[28px] font-bold text-headingsColor/85">
           حالا چرا
-          <span class="twTextGradient font-bold text-3xl">Steppy</span> ؟
+          <span class="twTextGradient font-bold">Steppy</span> ؟
         </p>
       </div>
       <div
@@ -92,7 +92,7 @@
   <section
     id="plansSection"
     #fitnessPlansSection
-    class="w-full h-[800px] flex flex-row gap-5 justify-center items-center"
+    class="w-full h-fit mt-30 mb-20 flex flex-row gap-5 justify-center items-center"
   >
     <div
       class="w-7/12 h-fit flex flex-col justify-between items-center"
@@ -101,7 +101,7 @@
       <div
         class="w-full h-full flex flex-col justify-between text-gray-700 animate-fadeInLeft opacity-0 gap-y-2"
       >
-        <p class="text-3xl font-bold text-headingsColor/85">
+        <p class="text-[28px] font-bold text-headingsColor/85">
           برنامه تمرینی، متناسب با هر هدف
         </p>
         <p class="text-[15px] leading-7">
@@ -193,9 +193,9 @@
           </mat-card>
         </div>
         <button
-          class="twBackgroundGradient animate-bounce text-white shadow-lg shadow-gray-400 hover:shadow-md cursor-pointer transition w-48 h-12 py-3 mt-8 rounded-xl text-[16px]"
+          class="twBackgroundGradient animate-bounce text-white shadow-lg shadow-gray-400 hover:shadow-md cursor-pointer transition w-38 h-12 py-3 mt-8 rounded-xl text-[16px]"
         >
-          مشاهده تمامی برنامه ها
+          مشاهده برنامه ها
         </button>
       </div>
     </div>
@@ -229,7 +229,9 @@
       [ngClass]="exerciseSectionObserved ? 'flex' : 'hidden'"
       class="w-6/12 h-full flex flex-col animate-fadeInRight justify-between items-center text-gray-700"
     >
-      <p class="text-3xl text-right w-full font-bold text-headingsColor/85 pb-2">
+      <p
+        class="text-[28px] text-right w-full font-bold text-headingsColor/85 pb-2"
+      >
         تمرین خودتو بساز!
       </p>
       <p class="text-[16px] leading-8">
@@ -254,24 +256,36 @@
                 <mat-card-title>{{ exercise["exerciseName"] }}</mat-card-title>
                 <mat-card-subtitle
                   [ngClass]="{
-                    hard: exercise['hardness'] === 'سخت',
-                    normal: exercise['hardness'] === 'متوسط',
-                    easy: exercise['hardness'] === 'آسان'
+                    hard: exercise['type'] === 'قدرتی',
+                    normal: exercise['type'] === 'ایزومتریک',
+                    easy: exercise['type'] === 'هوازی'
                   }"
-                  >سطح: <span>{{ exercise["hardness"] }}</span>
+                  >نوع تمرین : <span>{{ exercise["type"] }}</span>
                 </mat-card-subtitle>
                 <ul>
                   <li>
-                    <span> تعداد تکرار:</span> {{ exercise["sets"] }} ست
-                    {{ exercise["reps"] }} تایی
+                    <span> تعداد تکرار:</span>
+                    <span class="mr-auto"
+                      >{{ exercise["sets"] }} ست
+                      {{ exercise["reps"] }} تایی</span
+                    >
                   </li>
-                  <li><span>عضله هدف: </span>{{ exercise["target"] }}</li>
                   <li>
-                    <span>استراحت: </span>{{ exercise["restTime"] }} ثانیه
+                    <span>عضله هدف: </span
+                    ><span class="mr-auto">{{ exercise["target"] }}</span>
                   </li>
-                  <li><span>نقطه ضعف: </span>{{ exercise["weakness"] }}</li>
+                  <li>
+                    <span>استراحت: </span
+                    ><span class="mr-auto"
+                      >{{ exercise["restTime"] }} ثانیه</span
+                    >
+                  </li>
+                  <li>
+                    <span>نقطه ضعف: </span
+                    ><span class="mr-auto">{{ exercise["weakness"] }}</span>
+                  </li>
                 </ul>
-                <button routerLink="/training" mat-icon-button>
+                <button class="twBackgroundGradient" routerLink="/training" mat-icon-button>
                   <mat-icon>add</mat-icon>
                 </button>
               </mat-card-content>
@@ -279,7 +293,10 @@
           </div>
         </mat-tab>
       </mat-tab-group>
-      <app-http-loading message="درحال بارگذاری تمرین ها" *ngIf="!(allExercises$ | async)?.length" ></app-http-loading>
+      <app-http-loading
+        message="درحال بارگذاری تمرین ها"
+        *ngIf="!(allExercises$ | async)?.length"
+      ></app-http-loading>
     </div>
   </section>
 </div>

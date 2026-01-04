@@ -93,11 +93,11 @@
                 }}</mat-card-title>
                 <mat-card-subtitle
                   [ngClass]="{
-                    hard: selectedExercise.hardness === 'سخت',
-                    normal: selectedExercise.hardness === 'متوسط',
-                    easy: selectedExercise.hardness === 'آسان'
+                    hard: selectedExercise.type === 'قدرتی',
+                    normal: selectedExercise.type === 'ایزومتریک',
+                    easy: selectedExercise.type === 'هوازی'
                   }"
-                  >سطح: <span>{{ selectedExercise.hardness }}</span>
+                  >نوع تمرین: <span>{{ selectedExercise.type }}</span>
                 </mat-card-subtitle>
                 <p class="text-[13px] text-justify leading-6 text-gray-700">
                   {{ selectedExercise.description }}
@@ -120,12 +120,13 @@
             </p>
             <ul
               *ngIf="(newTrainings$ | async)?.length"
-              class="w-full h-fit grid grid-cols-8 grid-rows-1 justify-items-center gap-x-2.5 px-[35px] text-gray-500 text-[13px]"
+              class="w-full h-fit grid grid-cols-9 grid-rows-1 justify-items-center gap-x-2.5 px-[35px] text-gray-500 text-[13px]"
             >
               <li class="col-span-1">نام حرکت</li>
               <li class="col-span-2"></li>
               <li class="col-span-1">تعداد ست</li>
               <li class="col-span-1">تعداد تکرار</li>
+              <li class="col-span-1">نوع تمرین</li>
               <li class="col-span-1">تاریخ</li>
               <li class="col-span-2"></li>
             </ul>
@@ -153,12 +154,13 @@
             </p>
             <ul
               *ngIf="completedTrainings.length"
-              class="w-full h-fit grid grid-cols-8 grid-rows-1 justify-items-center gap-x-2.5 px-[35px] text-gray-500 text-[13px]"
+              class="w-full h-fit grid grid-cols-9 grid-rows-1 justify-items-center gap-x-2.5 px-[35px] text-gray-500 text-[13px]"
             >
               <li class="col-span-1">نام حرکت</li>
               <li class="col-span-2"></li>
               <li class="col-span-1">تعداد ست</li>
               <li class="col-span-1">تعداد تکرار</li>
+              <li class="col-span-1">نوع تمرین</li>
               <li class="col-span-1">تاریخ اتمام</li>
               <li class="col-span-2"></li>
             </ul>

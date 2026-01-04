@@ -17,8 +17,7 @@ export class AppComponent implements OnInit {
 
   loggingHandler() {
     if (this.authStatus) {
-      this.authService.logout();
-      this.router.navigate(['/login']);
+      this.router.navigate(['/dashboard']);
     }
     else {
       this.router.navigate(['/signup'])
@@ -31,8 +30,9 @@ export class AppComponent implements OnInit {
       next: (res) => {
         if(res.uid) {
           this.authStatus = true
-          this.userFirstName = res.firstName
+          this.userFirstName = res.firstName;
         }
+        else this.authStatus = false;
       }
     })
   }

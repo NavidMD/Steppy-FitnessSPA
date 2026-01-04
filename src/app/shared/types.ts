@@ -7,6 +7,9 @@ export type TrainingInfo = {
   restTime: number;
   weakness: string;
   description: string;
+  secondPerRep: number;
+  caloriePerSet: number;
+  type: string;
 };
 
 export type CompletedTrainingInfo = {
@@ -15,6 +18,9 @@ export type CompletedTrainingInfo = {
   sets: number;
   reps: number;
   id: number;
+  type?: string;
+  caloriesBurned?: number;
+  totalSeconds?: number;
 };
 
 export type NewTrainingInfo = {
@@ -22,5 +28,8 @@ export type NewTrainingInfo = {
   name: string;
   sets: number;
   reps: number;
-  dateAdded: Date
+  dateAdded: Date;
+  type: string;
+  secondPerRep: number;
+  caloriePerSet: number
 };

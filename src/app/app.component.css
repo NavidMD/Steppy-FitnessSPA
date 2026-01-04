@@ -28,6 +28,9 @@ mat-sidenav-content {
 mat-sidenav ul {
   width: 100%;
 }
+mat-sidenav p {
+  margin: 0;
+}
 mat-sidenav ul li {
   padding: 10px 8px;
   border-radius: 10px;

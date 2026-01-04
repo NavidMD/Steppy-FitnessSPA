@@ -6,6 +6,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { FormsModule } from '@angular/forms';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatLine } from "@angular/material/core";
 import { AngularFireModule } from "@angular/fire/compat"
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 //declared modules
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialCompsModule } from './material.module';
@@ -57,6 +58,7 @@ import { DashboardStaticsPanelComponent } from './dashboard/dashboard-statics-pa
     MaterialCompsModule,
     FormsModule,
     BrowserAnimationsModule,
+    NgxChartsModule,
     MatLine,
     HttpClientModule,
     SharedModule,
