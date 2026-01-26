@@ -1,0 +1,15 @@
+#main-hint {
+  transition: max-height 0.5s ease-in-out;
+  max-height: 0px;
+  overflow: hidden;
+}
+#main-hint div:first-child {
+  height: 100%;
+  width: 100%;
+}
+#hint:checked ~ #main-hint {
+  max-height: 500px;
+}
+#main-hint p {
+  margin: 0;
+}

@@ -6,7 +6,7 @@ import { SignupComponent } from './authentication/signup/signup.component';
 import { TrainingComponent } from './training/training.component';
 import { ActiveTrainingComponent } from './active-training/active-training.component';
 import { AuthGuard, PermissionService } from './authentication/auth.guard';
-import { FormStrictionService } from './authentication/form.guard';
+import { FormGuard, FormStrictionService } from './authentication/form.guard';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 import { DashboardLayoutComponent } from './dashboard/dashboard-layout/dashboard-layout.component';
 
@@ -16,7 +16,10 @@ const routes: Routes = [
     component: ActiveTrainingComponent,
     canActivate: [AuthGuard],
   },
-  { path: 'training', component: TrainingComponent, canActivate: [AuthGuard] },
+  { path: 'training',
+    component: TrainingComponent,
+    canActivate: [AuthGuard]
+  },
   {
     path: 'dashboard',
     component: DashboardLayoutComponent,
@@ -25,12 +28,12 @@ const routes: Routes = [
   {
     path: 'signup',
     component: SignupComponent,
-    canActivate: [FormStrictionService],
+    canActivate: [FormGuard],
   },
   {
     path: 'login',
     component: LoginComponent,
-    canActivate: [FormStrictionService],
+    canActivate: [FormGuard],
   },
   { path: '', component: HomeComponent },
   { path: '**', component: NotFoundPageComponent },

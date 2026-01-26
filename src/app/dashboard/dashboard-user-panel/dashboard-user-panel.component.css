@@ -12,10 +12,28 @@ ul li {
   display: flex;
   flex-direction: row;
   justify-content: start;
-  align-items: center;
+  align-items: start;
   gap: 20px;
-  
 }
 ul li mat-icon {
   color: #5199c9;
 }
+ul li {
+  color: #343434;
+}
+
+/* Media Queries */
+
+@media (max-width: 1150px) {
+  ul li {
+    padding: 8px 2px;
+    gap: 15px;
+  }
+}
+@media (max-width: 1024px) {
+  ul li {
+    padding: 8px 2px;
+    gap: 10px;
+  }
+}
+

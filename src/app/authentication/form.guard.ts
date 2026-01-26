@@ -1,5 +1,4 @@
 import { inject, Injectable } from "@angular/core";
-import { AuthService } from "./auth.service";
 import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot } from "@angular/router";
 import { AngularFireAuth } from "@angular/fire/compat/auth";
 import { map, Observable, take } from "rxjs";
@@ -24,7 +23,7 @@ export class FormStrictionService {
   }
 }
 
-export const AuthGuard: CanActivateFn = (next: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
+export const FormGuard: CanActivateFn = (next: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
   return inject(FormStrictionService).canActivate(next,state);
 }
 

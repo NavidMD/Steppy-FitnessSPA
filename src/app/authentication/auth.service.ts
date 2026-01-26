@@ -24,7 +24,7 @@ export class AuthService {
     private snackbar: MatSnackBar,
     private errorService: FirebaseErrorHandlingService
   ) {
-    this.firebaseAuth.authState
+      this.firebaseAuth.authState
       .pipe(
         switchMap((user) => {
           if (user) {

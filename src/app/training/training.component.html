@@ -1,9 +1,12 @@
 <div
-  class="flex flex-col justify-start items-center w-full min-h-[calc(100vh-84px)]"
+  class="flex flex-col justify-start items-center w-full min-h-[calc(100vh-84px)] overflow-visible"
 >
-  <section id="main-buttons" class="w-full flex flex-row justify-between">
-    <p class="text-2xl font-bold text-headingsColor/85">تمرین های من</p>
-    <div class="flex flex-row gap-4">
+  <section id="main-buttons" class="w-full flex flex-row justify-start">
+    <p class="routeMainTitle flex justify-center items-center">تمرین های من</p>
+    <label for="hint" class="mr-2 cursor-pointer"
+      ><img class="w-5 h-5" src="../../assets/vectors/danger-circle.svg"
+    /></label>
+    <div class="flex flex-row gap-4 mr-auto">
       <button
         title="ارتباط با مربی"
         class="text-btnSecondColor transition duration-100 hover:rotate-360"
@@ -19,15 +22,42 @@
       </button>
     </div>
   </section>
+  <input type="checkbox" id="hint" class="hidden" />
+  <div
+    id="main-hint"
+    class="w-full flex flex-col text-[13px] text-right bg-transparent text-gray-600/90 leading-6 max-[480px]:text-[12px] max-[480px]:leading-5.5 opacity-90"
+  >
+    <div class="p-3 px-0">
+      <p>
+        - با <span class="text-headingsColor/65 font-bold">افزودن تمرین</span>، میتونی تمرین جدید دلخواهت رو ایجاد کنی
+      </p>
+      <p>
+        - نمرین های ایجاد شده به تب <span class="text-headingsColor/65 font-bold">تمرین های جدید</span> اضافه میشوند
+      </p>
+      <p>
+        - با شروع و اتمام تمرین ، تمرین از لیست <span class="text-headingsColor/65 font-bold">تمرین های جدید</span> حذف شده و به تب <span class="text-headingsColor/70 font-bold">تمرین های تمکیل شده</span> اضافه میشود
+      </p>
+      <p>
+        - با زدن دکمه <span class="text-headingsColor/65 font-bold">شروع تمرین</span> ، وارد صفحه مربوط به اون تمرین میشی که اطلاعات کامل اون تمرین رو بهت نشون میده
+      </p>
+      <div class="w-full flex justify-center items-center">
+        <label for="hint" class="inline-block mt-3">
+          <img src="../../assets/vectors/arrow.svg" class="bg-steppylightBlue/90 cursor-pointer rounded-full block rotate-90 w-7 h-7" alt="">
+        </label>
+      </div>
+    </div>
+  </div>
   <mat-tab-group>
     <mat-tab label="تمرین های جدید">
       <div id="new-exercises-wrapper">
         <section
           id="addSection"
-          class="w-full h-[240px] pb-6 flex flex-row justify-between items-end gap-x-7 border-0 border-b border-b-steppylightBlue"
+          class="w-full h-[240px] pb-6 flex flex-row justify-between items-end gap-x-6 border-0 border-b border-b-steppylightBlue max-md:flex-col-reverse max-md:h-fit max-md:gap-y-5 max-md:pb-0 max-sm:pb-5"
         >
-          <div class="flex flex-col h-full justify-between w-2/10">
-            <mat-form-field appearance="outline">
+          <div
+            class="flex flex-col h-full justify-between w-2/10 max-lg:w-3/10 max-md:flex-row max-md:w-full max-md:gap-x-5 max-sm:flex-wrap [@media(max-width:480px)]:gap-x-3"
+          >
+            <mat-form-field appearance="outline" id="exerciseNameInput">
               <mat-label>نوع تمرین</mat-label>
               <mat-select
                 #exerciseNameInput
@@ -41,7 +71,10 @@
                 >
               </mat-select>
             </mat-form-field>
-            <div class="w-full flex flex-row gap-x-5">
+            <div
+              class="w-full flex flex-row gap-x-5 max-md:w-2/5 max-sm:w-[60%] [@media(max-width:480px)]:gap-x-3 [@media(max-width:425px)]:w-full"
+              id="set&repInput"
+            >
               <mat-form-field appearance="outline">
                 <mat-label>ست</mat-label>
                 <mat-select #exerciseSetsInput required>
@@ -71,9 +104,9 @@
                   exerciseRepsInput
                 )
               "
-              class="bg-btnSecondColor hover:shadow-sm transition cursor-pointer w-full py-4 rounded-xl text-[16px] text-white twFlexCentering shadow-md shadow-black/30"
+              class="bg-btnSecondColor hover:shadow-sm transition cursor-pointer w-full py-4 rounded-xl text-[16px] text-white twFlexCentering shadow-md shadow-black/30 max-md:w-45 max-sm:w-full"
             >
-              اضافه کردن تمرین
+              افزودن تمرین
             </button>
           </div>
           <mat-card>
@@ -99,7 +132,10 @@
                   }"
                   >نوع تمرین: <span>{{ selectedExercise.type }}</span>
                 </mat-card-subtitle>
-                <p class="text-[13px] text-justify leading-6 text-gray-700">
+                <p
+                  id="description"
+                  class="text-[13px] text-justify leading-6 text-gray-700"
+                >
                   {{ selectedExercise.description }}
                 </p>
               </mat-card-content>
@@ -120,15 +156,15 @@
             </p>
             <ul
               *ngIf="(newTrainings$ | async)?.length"
-              class="w-full h-fit grid grid-cols-9 grid-rows-1 justify-items-center gap-x-2.5 px-[35px] text-gray-500 text-[13px]"
+              class="w-full h-fit grid grid-cols-9 grid-rows-1 justify-items-center gap-x-2.5 px-[35px] text-gray-500 text-[13px] max-900:grid-cols-7 max-900:px-[20px]"
             >
               <li class="col-span-1">نام حرکت</li>
-              <li class="col-span-2"></li>
+              <li class="col-span-2 max-900:col-span-1"></li>
               <li class="col-span-1">تعداد ست</li>
               <li class="col-span-1">تعداد تکرار</li>
               <li class="col-span-1">نوع تمرین</li>
               <li class="col-span-1">تاریخ</li>
-              <li class="col-span-2"></li>
+              <li class="col-span-2 max-900:col-span-1"></li>
             </ul>
             <app-new-training
               *ngFor="let item of newTrainings"
@@ -145,7 +181,9 @@
     <mat-tab label="تمرین های تکمیل شده">
       <div id="previous-exercises-wrapper">
         <section class="w-full h-auto flex flex-col pt-6 gap-5">
-          <ng-container *ngIf="completedTrainings$ | async as completedTrainings">
+          <ng-container
+            *ngIf="completedTrainings$ | async as completedTrainings"
+          >
             <p
               class="text-center pt-5 text-gray-500 text-[15px]"
               *ngIf="!completedTrainings.length"

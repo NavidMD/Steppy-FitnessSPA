@@ -49,6 +49,5 @@ export class HomeComponent implements AfterViewInit, OnInit {
 
   ngOnInit(): void {
     this.allExercises$ = this.trainingService.getExerciseModels();
-    console.log(this.allExercises$);
   }
 }

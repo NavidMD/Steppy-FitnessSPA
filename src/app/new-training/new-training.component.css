@@ -4,7 +4,7 @@ mat-card {
   width: 100%;
   height: 90px;
   display: grid;
-  grid-template-columns: 1fr 2fr repeat(4,1fr) 2fr;
+  grid-template-columns: 1fr 2fr repeat(4, 1fr) 2fr;
   grid-template-rows: 100%;
   justify-items: center;
   align-items: center;
@@ -26,5 +26,25 @@ mat-card img {
   max-height: 100%;
 }
 .mat-tooltip {
-  font-family: 'IRANSANSdn';
+  font-family: "IRANSANSdn";
+}
+
+/* Media Queries */
+
+@media (max-width: 900px) {
+  mat-card {
+    padding: 0 20px;
+    width: 100%;
+    height: 70px;
+    grid-template-columns: 1fr 1fr repeat(4, 1fr) 1fr;
+    column-gap: 10px;
+    border-radius: 16px;
+  }
+  mat-card p {
+    padding: 0;
+    margin: 0;
+  }
+  mat-card img {
+    max-height: 95%;
+  }
 }

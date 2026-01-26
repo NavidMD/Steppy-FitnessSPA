@@ -6,4 +6,5 @@ import { Component, Input } from '@angular/core';
   styleUrl: './progress-loading.component.css'
 })
 export class ProgressLoadingComponent {
+  
 }

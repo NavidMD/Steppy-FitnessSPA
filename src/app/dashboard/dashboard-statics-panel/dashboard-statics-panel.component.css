@@ -1,5 +1,5 @@
 svg {
-  width: 110%;
+  width: 140%;
   height: 75%;
   opacity: 35%;
   position: absolute;
@@ -47,7 +47,7 @@ use {
   display: flex;
   justify-content: right;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   font-size: 12px;
 }
 #type-aerobic::before,
@@ -110,5 +110,34 @@ use {
   background-size: contain;
   background-image: url("../../../assets/vectors/arrow.svg");
   background-repeat: no-repeat;
+}
 
+/* Media Queries */
+@media (max-width: 1150px) {
+  svg {
+    width: 150%;
+  }
+}
+@media (max-width: 900px) {
+  #type-aerobic,
+  #type-isometric,
+  #type-strength {
+    font-size: 13px;
+  }
+}
+@media (max-width: 800px) {
+  svg {
+    width: 150%;
+  }
+}
+@media (max-width: 480px) {
+  svg {
+    width: 130%;
+  }
+  #type-aerobic,
+  #type-isometric,
+  #type-strength {
+    font-size: 13px;
+    justify-content: center;
+  }
 }

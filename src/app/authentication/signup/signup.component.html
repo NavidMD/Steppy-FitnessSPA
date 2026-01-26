@@ -1,20 +1,76 @@
-<div class="flex justify-center items-center w-full h-[calc(100vh-170px)]">
+<div
+  class="flex justify-center items-center w-full min-h-[calc(100vh-170px)] overflow-visible"
+>
   <div
-    class="bg-transparent w-6/8 h-[790px] flex flex-row-reverse justify-center items-center p-10 pb-24"
+    class="bg-transparent w-6/8 h-[750px] flex flex-row-reverse justify-center items-center pt-0 p-10 pb-24 max-xl:w-7/8 [@media(max-width:1175px)]:w-full max-lg:px-0 max-sm:h-full sm:[@media(max-width:900px)]:h-175 [@media(max-width:768px)]:p-0 [@media(max-width:768px)]:pb-0"
   >
-    <div id="formStepperWrapper" class="w-3/5 h-full">
+    <div id="formStepperWrapper" class="w-3/5 h-full max-md:w-full">
       <mat-stepper
         id="signupStepper"
         linear
         animationDuration="500"
         #signupStepper
+        [labelPosition]="firstStepShow ? 'bottom' : 'end'"
       >
+        <!-- Step 1 (responsive mode) -->
+        <mat-step
+          completed="false"
+          id="welcome-step"
+          *ngIf="firstStepShow === true"
+        >
+          <ng-template matStepLabel>عضویت</ng-template>
+          <div
+            class="flex flex-col justify-between items-center text-center w-full h-full"
+          >
+            <p
+              class="signinMainTitle pt-3 max-[480px]:py-0"
+            >
+              عضویت در<span
+                class="twTextGradient font-bold text-[34px] font-sans max-900:text-[28px] max-[480px]:text-[26px]"
+                ><mat-icon>fitness_center</mat-icon>Steppy</span
+              >
+            </p>
+            <img
+              class="flex flex-auto w-full object-contain h-[340px] [480px]:max-sm:h-[310px] [400px]:max-[480px]:h-[290px] max-[400px]:h-[270px] max-900:px-0"
+              src="../../../assets/vectors/digital-contract.svg"
+            />
+            <div
+              class="w-full h-fit text-justify px-1 sm:max-md:px-8 max-sm:px-1"
+            >
+              <p class="signinDescription">
+                با عضویت در Steppy می توانید با دریافت برنامه تمرینی خصوصی توسط
+                مربیان مجرب و انجام تمرینات متناسب با ویژگی های جسمانی خود به
+                صورت هفتگی و روزانه روند پیشرفت خود را مشاهده کنید و به بروز
+                ترین مقالات آموزشی دسترسی داشته باشید.
+              </p>
+            </div>
+            <p class="text-[15px] pt-1 pb-4 max-[480px]:text-sm">
+              قبلا ثبت نام کردی؟
+              <a class="text-blue-600" routerLink="/login"
+                >ورود به حساب کاربری</a
+              >
+            </p>
+            <button
+              (click)="firstStepHandler()"
+              class="twBackgroundGradient shadow-lg hover:shadow-md shadow-black/30 transition cursor-pointer disabled:opacity-70 w-1/2 p-3.5 max-md:py-3 text-[17px] max-md:text-[16px] rounded-xl max-sm:w-full"
+            >
+              شروع
+            </button>
+          </div>
+        </mat-step>
+
+        <!-- Step 2 -->
         <mat-step completed="false">
           <ng-template matStepLabel>اطلاعات حساب کاربری</ng-template>
           <form
-            class="flex flex-col justify-between items-center text-center gap-y-7 w-full h-full"
+            class="flex flex-col justify-between items-center text-center gap-y-7 w-full h-full max-md:gap-y-4 max-900:gap-y-5 sm:max-md:px-4"
             #signupForm="ngForm"
           >
+            <p
+              class="hidden signinStepTitle max-md:block pb-1"
+            >
+              اطلاعات حساب کاربری
+            </p>
             <mat-form-field class="w-full">
               <mat-label>نام کاربری</mat-label>
               <mat-icon
@@ -33,7 +89,7 @@
                 #usernameInput="ngModel"
               />
               <mat-hint class="w-full relative"
-                >نام کاربری (حداقل 6 کاراکتر)
+                >حداقل 6 کاراکتر
                 <span
                   class="absolute left-0 top-0.5"
                   [ngClass]="{
@@ -116,8 +172,7 @@
                 (ngModelChange)="passwordCheck()"
               />
               <mat-hint class="w-full relative">
-                یک کلمه عبور با استفاده از اعداد و کاراکترهای خاص ایجاد
-                کنید(&,&#64;,#,...)
+                با استفاده از اعداد و کاراکترهای خاص (&,&#64;,#,...)
                 <span
                   class="absolute left-0 top-0.5"
                   [ngClass]="{
@@ -185,7 +240,7 @@
               required
               name="agreement"
               color="primary"
-              class="w-full text-right"
+              class="w-full text-right text-gray-600 max-md:pb-4"
               #agreementInput="ngModel"
             >
               <a class="text-blue-800 underline" href="www.google.com"
@@ -197,20 +252,27 @@
               type="button"
               (click)="goToNextStep()"
               [disabled]="!signupForm.valid"
-              class="twBackgroundGradient shadow-lg hover:shadow-md shadow-black/30 transition cursor-pointer disabled:opacity-70 w-full p-4 mt-auto text-[17px] rounded-xl"
+              class="twBackgroundGradient shadow-lg hover:shadow-md shadow-black/30 transition w-full text-[17px] p-3.5 mt-auto rounded-xl cursor-pointer disabled:opacity-70 max-md:py-3 max-sm:w-full sm:max-md:w-1/2 max-md:text-[16px]"
             >
               مرحله بعدی
             </button>
           </form>
         </mat-step>
+
+        <!-- Step 3 -->
         <mat-step completed="false">
           <ng-template matStepLabel>اطلاعات جسمانی</ng-template>
           <form
-            class="flex flex-col justify-between items-center text-center gap-y-7 w-full h-full"
+            class="flex flex-col justify-between items-center text-center gap-y-7 w-full h-full max-md:gap-y-4 max-900:gap-y-5 sm:max-md:px-4"
             #physicalInfoForm="ngForm"
             (ngSubmit)="submitSignUpForm(signupForm, physicalInfoForm)"
           >
-            <div class="w-full flex flex-row gap-3">
+            <p
+              class="hidden signinStepTitle max-md:block pb-1"
+            >
+              اطلاعات جسمانی
+            </p>
+            <div class="w-full flex flex-row gap-3 max-[400px]:flex-col max-[400px]:gap-y-4">
               <mat-form-field class="w-full">
                 <mat-label>نام</mat-label>
                 <mat-icon
@@ -230,7 +292,7 @@
                   ngModel
                   #firstName="ngModel"
                 />
-                <mat-hint class="w-full relative">نام (حداقل 3 کلمه)</mat-hint>
+                <mat-hint class="w-full relative">حداقل 3 کلمه</mat-hint>
                 <mat-error
                   *ngIf="firstName.touched && firstName.value.length === 0"
                 >
@@ -267,7 +329,7 @@
                   #lastNameInput="ngModel"
                 />
                 <mat-hint class="w-full relative"
-                  >نام خانوادگی (حداقل 3 کلمه)</mat-hint
+                  >حداقل 3 کلمه</mat-hint
                 >
                 <mat-error
                   *ngIf="
@@ -383,46 +445,50 @@
               #genderInput="ngModel"
               required
             >
-              <mat-label class="text-[15px]">جنسیت:</mat-label>
-              <mat-radio-button value="male">مرد</mat-radio-button>
-              <mat-radio-button value="female">زن</mat-radio-button>
+              <mat-label class="text-[15px] font-bold">جنسیت:</mat-label>
+              <mat-radio-button value="male" >مرد</mat-radio-button>
+              <mat-radio-button value="female" >زن</mat-radio-button>
             </mat-radio-group>
             <div class="w-full h-[78px] flex items-center justify-center">
-              <app-progress-loading *ngIf="spinnerActive"></app-progress-loading>
+              <p id="last-step-hint" class="flex justify-center items-start leading-6 text-right text-gray-600 text-sm max-[480px]:text-[13px] max-[480px]:leading-5.5">اطلاعات وارد شده در این قسمت به منظور ثبت وضعیت اولیه و روند تغییرات جسمانی شما طی دوره ها و تمرینات می باشد.</p>
             </div>
-            <div class="w-full flex flex-row gap-2.5 mt-auto mb-0">
+            <div class="w-full flex flex-row gap-2.5 mt-auto mb-0" *ngIf="!spinnerActive">
               <button
                 matStepperPrevious
-                class="twBackgroundGradient shadow-lg hover:shadow-md shadow-black/30 transition cursor-pointer disabled:opacity-70 w-2/5 p-4 mt-auto text-[17px] rounded-xl"
+                class="twBackgroundGradient flex flex-row-reverse justify-center items-center shadow-lg hover:shadow-md shadow-black/30 transition cursor-pointer disabled:opacity-70 w-1/5 p-2.5 mt-auto text-[17px] rounded-xl max-md:py-2 max-md:text-[16px] min-h-[44px]"
               >
-                مرحله قبلی
+                <img class="w-[28px]" src="../../../assets/vectors/navigate-next.svg"/>
               </button>
               <button
                 type="submit"
                 [disabled]="!physicalInfoForm.valid"
-                class="twBackgroundGradient relative shadow-lg hover:shadow-md shadow-black/30 transition cursor-pointer disabled:opacity-70 w-full p-4 mt-auto text-[17px] rounded-xl"
-              >
+                class="twBackgroundGradient relative shadow-lg hover:shadow-md shadow-black/30 transition cursor-pointer disabled:opacity-70 w-full p-3.5 mt-auto text-[17px] rounded-xl max-md:py-3 max-md:text-[16px]"
+                >
                 ثبت نام
               </button>
             </div>
+            <app-progress-loading class="mt-auto"
+              *ngIf="spinnerActive"
+            ></app-progress-loading>
           </form>
         </mat-step>
       </mat-stepper>
     </div>
     <div
-      class="flex flex-col justify-center items-center text-center w-2/5 h-full border-l border-gray-300/80"
+      class="flex flex-col justify-center items-center text-center w-2/5 h-full border-l border-gray-300/80 [@media(max-width:769px)]:hidden"
     >
-      <p class="text-[28px] text-headingsColor font-bold">
-        عضویت در<span class="twTextGradient font-bold text-[34px] font-sans"
+      <p class="signinMainTitle">
+        عضویت در<span
+          class="twTextGradient font-bold text-[34px] font-sans max-900:text-[28px]"
           ><mat-icon>fitness_center</mat-icon>Steppy</span
         >
       </p>
       <img
-        class="w-9/10 h-[340px] px-1"
+        class="w-9/10 h-[340px] px-1 max-900:px-0 max-900:h-[300px] max-[800px]:h-[280px]"
         src="../../../assets/vectors/digital-contract.svg"
       />
-      <div class="w-full h-fit text-justify px-8">
-        <p class="leading-6 text-gray-600">
+      <div class="w-full h-fit text-justify px-8 max-900:px-6">
+        <p class="signinDescription">
           با عضویت در Steppy می توانید با دریافت برنامه تمرینی خصوصی توسط مربیان
           مجرب و انجام تمرینات متناسب با ویژگی های جسمانی خود به صورت هفتگی و
           روزانه روند پیشرفت خود را مشاهده کنید و به بروز ترین مقالات آموزشی

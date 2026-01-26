@@ -12,6 +12,10 @@ mat-stepper {
 ::ng-deep .mat-horizontal-content-container {
   padding-bottom: 20px !important;
   padding-right: 32px !important;
+  overflow: visible !important;
+}
+mat-input {
+  background-color: transparent;
 }
 ::ng-deep .mat-horizontal-stepper-header-container {
   padding: 0 15px;
@@ -29,8 +33,76 @@ mat-stepper {
 ::ng-deep .mat-step-icon span {
   padding-top: 1px;
 }
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+::ng-deep .mat-step-header[ng-reflect-state="edit"] .mat-step-icon {
+  background-color: rgb(79, 132, 79) !important;
+}
+
+#last-step-hint::before {
+  content: "";
+  display: inline-block;
+  background: url("../../../assets/vectors/danger-circle.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin-left: 5px;
+  margin-top: 2px;
+  min-width: 20px;
+  height: 20px;
+}
+
+/* Media Queries */
+
+@media (max-width: 900px) {
+  ::ng-deep .mat-horizontal-content-container {
+    padding-bottom: 10px !important;
+    padding-right: 25px !important;
+  }
+  ::ng-deep .mat-horizontal-stepper-header-container {
+    padding: 0 5px;
+  }
+  mat-label {
+    font-size: 14px;
+  }
+}
+@media (max-width: 767px) {
+  ::ng-deep .mat-step-text-label {
+    display: none;
+  }
+}
+@media (max-width: 768px) {
+  ::ng-deep .mat-horizontal-stepper-header-container {
+    height: fit-content !important;
+  }
+  ::ng-deep .mat-horizontal-content-container {
+    height: 100% !important;
+    padding: 0 10px 10px 10px !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+  }
+  ::ng-deep .mat-horizontal-stepper-header-container {
+    padding: 0;
+    height: fit-content !important;
+    user-select: none;
+  }
+}
+
+@media (max-width: 480px) {
+  /* ::ng-deep .mat-horizontal-content-container {
+    padding: 0 0 20px 0 !important;
+  } */
+  ::ng-deep mat-hint {
+    font-size: 11px !important;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    line-clamp: 1;
+    display: -webkit-box; /* نمایش به صورت box */
+    -webkit-line-clamp: 1; /* تعداد خطوط مجاز */
+    -webkit-box-orient: vertical;
+  }
 }

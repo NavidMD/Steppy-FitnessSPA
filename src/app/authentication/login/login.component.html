@@ -1,14 +1,14 @@
-<div class="flex justify-center items-center w-full h-[calc(100vh-170px)]">
+<div class="flex justify-center items-center w-full min-h-[calc(100vh-170px)]">
   <div
-    class="bg-transparent w-6/8 h-[630px] flex flex-row-reverse justify-center items-center p-10 pb-24"
+    class="bg-transparent w-6/8 h-[630px] flex flex-row-reverse justify-center items-center p-10 pb-24 max-xl:w-7/8 [@media(max-width:1175px)]:w-full max-lg:px-0 max-sm:h-full sm:[@media(max-width:900px)]:h-150 [@media(max-width:768px)]:p-0 [@media(max-width:768px)]:pb-0 max-md:flex-col-reverse"
   >
     <form
-      class="flex flex-col justify-between items-center text-right gap-y-7 w-3/5 h-full pr-8.5"
+      class="flex flex-col justify-start items-center text-right gap-y-7 w-3/5 h-full max-md:gap-y-4 max-900:gap-y-5 max-md:w-full"
       #loginForm="ngForm"
       (ngSubmit)="submitLogin(loginForm)"
     >
-      <p class="text-[28px] text-headingsColor font-bold pb-4">
-        ورود به<span class="twTextGradient font-bold text-[34px] font-sans"
+      <p class="signinMainTitle pb-4 max-[480px]:py-0 max-md:hidden">
+        ورود به<span class="twTextGradient font-bold text-[34px] font-sans max-900:text-[28px] max-[480px]:text-[26px]"
           ><mat-icon>fitness_center</mat-icon>Steppy</span
         >
       </p>
@@ -94,34 +94,40 @@
           کلمه عبور باید دارای حداقل یک عدد و کاراکتر خاص باشد(&,&#64;,#,...)
         </mat-error>
       </mat-form-field>
-      <p class="text-gray-600 pr-0.5 w-full">
+      <p class="text-gray-600 pr-0.5 w-full text-sm max-[480px]:text-[13px]">
         رمز عبور را فراموش کرده اید؟
-        <a class="text-blue-700 text-sm cursor-pointer">بازیابی رمز عبور</a>
+        <a class="text-blue-700 cursor-pointer">بازیابی رمز عبور</a>
       </p>
-      <app-progress-loading *ngIf="spinnerActive"></app-progress-loading>
+      <app-progress-loading class="mt-auto" *ngIf="spinnerActive"></app-progress-loading>
       <button
+        *ngIf="!spinnerActive"
         type="submit"
         [disabled]="!loginForm.valid"
-        class="twBackgroundGradient relative shadow-lg hover:shadow-md shadow-black/30 transition cursor-pointer disabled:opacity-70 w-full p-4 mt-auto text-[17px] rounded-xl"
+        class="twBackgroundGradient relative shadow-lg hover:shadow-md shadow-black/30 transition cursor-pointer disabled:opacity-70 w-full p-3.5 mt-auto text-[17px] rounded-xl max-md:py-3 max-md:text-[16px]"
       >
         ورود به حساب
       </button>
     </form>
     <div
-      class="flex flex-col justify-between items-center text-center w-2/5 h-full border-l border-gray-300"
+      class="flex flex-col justify-center items-center text-center w-2/5 h-full border-l border-gray-300 max-md:w-full max-md:border-0"
     >
+      <p id="mobile-login-title" class="hidden text-[28px] text-headingsColor font-bold pb-4 max-900:text-[25px] max-md:py-0 max-[480px]:text-[23px] max-md:block">
+        ورود به<span class="twTextGradient font-bold text-[34px] font-sans max-900:text-[28px] max-[480px]:text-[26px]"
+          ><mat-icon>fitness_center</mat-icon>Steppy</span
+        >
+      </p>
       <img
-        class="w-9/10 h-[340px] px-1"
+        class="w-9/10 h-[340px] px-1 max-900:px-0 max-900:h-[300px] max-[800px]:h-[280px]"
         src="../../../assets/vectors/digital-contract.svg"
       />
-      <div class="w-full h-fit text-justify px-8">
-        <p class="leading-6 text-gray-600">
+      <div class="w-full h-fit text-justify px-8 max-900:px-6 max-md:hidden">
+        <p class="signinDescription">
           با عضویت در Steppy می توانید با دریافت برنامه تمرینی خصوصی توسط مربیان
           مجرب به صورت هفتگی و روزانه روند پیشرفت خود را مشاهده کنید و به بروز
           ترین مقالات آموزشی دسترسی داشته باشید.
         </p>
       </div>
-      <p class="text-md pt-5">
+      <p class="text-md pt-5 max-md:p-[0px_0px_10px_0px]">
         تاحالا ثبت نام نکردی؟
         <a class="text-blue-600" routerLink="/signup">ثبت نام</a>
       </p>

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm, NgModel } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { MatStepper } from '@angular/material/stepper';
@@ -10,16 +10,24 @@ import { Subscription } from 'rxjs';
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css',
 })
-export class SignupComponent implements OnDestroy {
+export class SignupComponent implements OnDestroy, OnInit {
   @ViewChild('passwordInput') password!: NgModel;
   @ViewChild('signupStepper') stepper!: MatStepper;
   @ViewChild('signupForm') signupForm!: NgForm;
   hidePassword: boolean = true;
-
+  welcomeStepShown: boolean = false;
   spinnerActive: boolean = false;
   subscription!: Subscription;
+  firstStepShow: boolean = false;
 
   constructor(private authService: AuthService) {}
+
+  firstStepHandler() {
+    if(this.firstStepShow === true) {
+      this.stepper.selected!.completed = true;
+      this.stepper.next();
+    }
+  }
 
   goToNextStep() {
     if (this.signupForm.valid) {
@@ -50,7 +58,7 @@ export class SignupComponent implements OnDestroy {
       )
       .then((result) => {
         this.spinnerActive = false;
-      })
+      });
   }
 
   passwordCheck() {
@@ -62,6 +70,20 @@ export class SignupComponent implements OnDestroy {
     ) {
       return this.password.control.setErrors({ passwordPattern: true });
     }
+  }
+
+  ngOnInit(): void {
+    if (window.innerWidth < 768) {
+      this.firstStepShow = true;
+    } else this.firstStepShow = false;
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 768) {
+        this.firstStepShow = false;
+      } else if (window.innerWidth <= 768) {
+        this.firstStepShow = true;
+      }
+    });
+    this.stepper.previous();
   }
 
   ngOnDestroy(): void {

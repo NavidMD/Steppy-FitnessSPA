@@ -1,8 +1,12 @@
-<mat-card class="h-full py-6 px-5">
+<mat-card class="w-full h-full block py-6 px-5">
   <div id="avatar" class="w-full h-fit flex justify-center items-center py-3">
     <img
-      class="object-contain w-38 h-38 border border-steppylightBlue rounded-full p-0.5 opacity-95"
-      [src]="'../../../assets/vectors/' + ((userInfo$ | async)?.gender === 'male' ? 'man (1)' : 'woman (1)') + '.png'"
+      class="object-contain w-38 h-38 rounded-full p-0.5 opacity-95"
+      [src]="
+        '../../../assets/vectors/' +
+        ((userInfo$ | async)?.gender === 'male' ? 'man (1)' : 'woman (1)') +
+        '.png'
+      "
       alt=""
     />
   </div>
@@ -39,11 +43,9 @@
     </div>
   </ng-container>
   <ul class="py-4 border-t mt-4 border-steppylightBlue">
-    <li class="text-black/80">
-      <mat-icon>checklist_rtl</mat-icon>برنامه های تمرینی من
-    </li>
-    <li class="text-black/80"><mat-icon>history</mat-icon>تاریخچه خریدها</li>
-    <li class="text-black/80"><mat-icon>message</mat-icon>پیام ها</li>
+    <li><mat-icon>checklist_rtl</mat-icon>تمرین ها</li>
+    <li><mat-icon>history</mat-icon>برنامه ها</li>
+    <li><mat-icon>message</mat-icon>پیام ها</li>
   </ul>
   <div id="action" class="mt-auto w-full flex flex-row gap-3">
     <button

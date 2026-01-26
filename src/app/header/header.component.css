@@ -1,7 +1,7 @@
 mat-toolbar {
   width: 100%;
   max-width: 1600px;
-  height: 170px;
+  height: 150px;
   background-color: transparent;
   padding: 20px 0px;
   display: flex;
@@ -61,15 +61,35 @@ ul li:hover {
   10% {
     display: block;
     opacity: 1;
-    width: 140px;
+    width: 130px;
   }
   90% {
     display: block;
     opacity: 1;
-    width: 140px;
+    width: 130px;
   }
   100% {
     display: none;
     opacity: 0;
+  }
+}
+
+/* Media Queries */
+
+@media (max-width: 1024px) {
+  #welcome-btn,
+  #logout-btn,
+  #signin-btn {
+    height: 40px;
+  }
+}
+@media (max-width: 900px) {
+  mat-toolbar {
+    height: 120px;
+  }
+}
+@media (max-width: 640px) {
+  mat-toolbar {
+    height: 100px;
   }
 }

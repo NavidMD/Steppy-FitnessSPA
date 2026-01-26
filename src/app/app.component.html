@@ -6,42 +6,41 @@
       >
         <button
           (click)="loggingHandler()"
-          class="flex justify-center items-center bg-white p-2 twGradientButton rounded-xl"
+          class="flex justify-center items-center bg-headingsColor/80 text-white p-2 twGradientButton rounded-xl"
         >
           <mat-icon>{{ authStatus ? "account_circle" : "add" }}</mat-icon>
         </button>
         <p
-          class="h-full w-full flex justify-start items-center text-[15px] font-bold"
+          class="h-full w-full flex justify-start items-center text-[15px] font-bold max-[480px]:text-sm"
         >
           {{ authStatus ? "خوش آمدید،" : "ورود / ثبت نام" }}
           <span *ngIf="authStatus">{{ userFirstName }}</span>
         </p>
       </section>
       <section
-        class="w-full border-t border-gray-300 h-fit flex flex-col justify-between items-start py-3 px-4"
+        class="w-full border-t border-gray-300 h-fit flex flex-col justify-between items-start py-3 pt-5 px-4 max-sm:px-1"
       >
-        <p class="text-lg">خدمات</p>
+        <p class="text-[16.5px] text-headingsColor font-bold">خدمات</p>
         <ul class="py-2">
-          <li><mat-icon>event</mat-icon>برنامه های تمرینی</li>
-          <li><mat-icon>auto_stories</mat-icon>مقالات آموزشی</li>
-          <li><mat-icon>co_present</mat-icon>مربیان</li>
+          <li routerLink="/training"><mat-icon>event</mat-icon>تمرین های من</li>
+          <li routerLink="/training"><mat-icon>auto_stories</mat-icon>مقالات آموزشی</li>
+          <li routerLink="/training"><mat-icon>co_present</mat-icon>مربیان</li>
         </ul>
       </section>
       <section
-        class="w-full border-t border-gray-300 h-fit flex flex-col justify-between items-start py-3 px-4"
+        class="w-full border-t border-gray-300 h-fit flex flex-col justify-between items-start py-3 pt-5 px-4 max-sm:px-1"
       >
-        <p class="text-lg">داشبورد</p>
+        <p class="text-[16.5px] text-headingsColor font-bold">داشبورد</p>
         <ul class="py-2">
-          <li><mat-icon>checklist_rtl</mat-icon>برنامه های تمرینی من</li>
-          <li><mat-icon>history</mat-icon>تاریخچه خریدها</li>
-          <li><mat-icon>message</mat-icon>پیام ها</li>
-          <li><mat-icon>insights</mat-icon>روند پیشرفت</li>
+          <li routerLink="/dashboard"><mat-icon>history</mat-icon>تاریخچه خریدها</li>
+          <li routerLink="/dashboard"><mat-icon>message</mat-icon>پیام ها</li>
+          <li routerLink="/dashboard"><mat-icon>insights</mat-icon>روند پیشرفت</li>
         </ul>
       </section>
       <section
-        class="w-full border-t border-gray-300 h-fit flex flex-col justify-between items-start py-3 px-4"
+        class="w-full border-t border-gray-300 h-fit flex flex-col justify-between items-start py-3 pt-5 px-4 max-sm:px-1"
       >
-        <p class="text-lg">تنظیمات</p>
+        <p class="text-[16.5px] text-headingsColor font-bold">تنظیمات</p>
         <ul class="py-2">
           <li><mat-icon>settings</mat-icon>تنظمات برنامه</li>
           <li><mat-icon>info</mat-icon>درباره ما</li>

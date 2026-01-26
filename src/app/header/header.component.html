@@ -1,18 +1,18 @@
 <mat-toolbar>
-  <div class="w-full flex justify-start items-center gap-x-8">
+  <div class="w-full flex justify-start items-center gap-x-7 max-lg:gap-x-4 max-md:gap-x-2.5">
     <button
       (click)="onMenuBtnClick()"
-      class="flex justify-center items-center p-2.5 twBackgroundGradient twGradientButton rounded-xl"
+      class="twFlexCentering p-2.5 max-lg:p-2 twBackgroundGradient twGradientButton rounded-xl"
     >
       <mat-icon>menu_open</mat-icon>
     </button>
-    <button routerLink="/" class="cursor-pointer text-[22px] font-bold ml-4">
-      <span class="twTextGradient font-bold text-[32px] font-sans"
+    <button routerLink="/" class="cursor-pointer text-[22px] font-bold ml-4 max-sm:hidden">
+      <span class="twTextGradient font-bold text-[32px] max-md:text-[26px] font-sans"
         ><mat-icon class="pt-1">fitness_center</mat-icon>Steppy</span
       >
     </button>
-    <nav class="w-full text-[17px]">
-      <ul class="flex flex-row justify-start gap-x-10 text-headingsColor">
+    <nav class="w-full text-[16px] max-[900px]:hidden max-xl:text-[15px] font-semibold">
+      <ul class="flex flex-row justify-start gap-x-10 text-headingsColor/75 max-xl:gap-x-6">
         <li routerLink="/training">تمرین های من</li>
         <li>مربیان</li>
         <li>مقالات</li>
@@ -23,8 +23,9 @@
   <div class="w-full flex justify-end items-center">
     <button
       *ngIf="authStatus === false"
+      id="signin-btn"
       routerLink="/login"
-      class="twFlexCentering gap-1.5 pl-3.5 pr-3 py-1.5 text-[15px] twBackgroundGradient twGradientButton rounded-xl"
+      class="twFlexCentering gap-1.5 max-lg:gap-0.5 pl-3.5 pr-3 py-1.5 text-[15px] max-lg:text-sm twBackgroundGradient twGradientButton rounded-xl"
     >
       <mat-icon>person</mat-icon>
       ورود به حساب
@@ -33,7 +34,7 @@
       id="logout-btn"
       *ngIf="authStatus === true"
       (click)="logout()"
-      class="text-[16px] bg-red-500/80 twGradientButton text-white px-2.5 rounded-xl ml-1.5 hover:bg-red-500 transition"
+      class="  bg-red-500/80 twGradientButton text-white px-2.5 max-lg:p-2 rounded-xl ml-1.5 hover:bg-red-500 transition"
     >
       <mat-icon>logout</mat-icon>
     </button>
@@ -41,7 +42,7 @@
       id="welcome-btn"
       *ngIf="authStatus === true"
       routerLink="/dashboard"
-      class="text-[15px] twBackgroundGradient twGradientButton p-2.5 rounded-xl"
+      class="text-[15px] max-lg:text-sm twBackgroundGradient twGradientButton p-2.5 max-lg:p-2 rounded-xl"
     >
       <span class="overflow-hidden inline">خوش اومدی {{userFirstName}} :)</span>
       <mat-icon>person</mat-icon>

@@ -1,31 +1,43 @@
 <div class="flex flex-col justify-center items-start w-full h-auto">
   <section
-    class="w-full h-[600px] flex flex-row justify-center items-center overflow-hidden pb-20"
+    class="w-full h-[600px] overflow-visible flex flex-row justify-center items-center pb-20 mb-10 max-sm:mb-7 max-900:pb-0 max-900:flex-col max-900:h-[750px] 900:max-xl:h-[500px] max-sm:h-fit max-900:gap-y-10"
   >
-    <div class="w-7/12">
+    <div
+      class="w-7/12 flex justify-center items-center max-900:justify-center max-900:w-full max-900:h-2/3"
+    >
       <img
-        class="w-full overflow-hidden opacity-0 animate-fadeInLeft"
-        src="../../assets/vectors/vecteezy_man-is-doing-kettlebell-exercises-at-the-gym-illustration_11634393 (1)-Photoroom.png"
+        class="w-[85%] h-[85%] object-contain overflow-visible animate-fadeInLeft max-1075:w-[90%] max-1075:h-[90%] max-lg:w-[95%] max-[900px]:w-full max-[900px]:h-full"
+        src="../../assets/vectors/herosectionphoto-Photoroom (1).png"
         alt=""
       />
     </div>
-    <div class="w-4/12 h-auto">
+    <div class="w-4/12 pl-11 max-1100:pl-0 max-900:w-full max-900:h-1/3">
       <div
-        class="w-full h-full flex flex-col justify-center items-start text-gray-700 animate-fadeInRight opacity-0 gap-4"
+        class="w-full h-full flex flex-col justify-center items-start max-[480px]:items-center animate-fadeInRight opacity-0 gap-5 900:max-lg:gap-3 max-900:gap-1 max-1075:justify-end"
       >
-        <p class="text-4xl font-bold text-headingsColor/85">
-          هروز یک قدم جلوتر!
+        <p
+          class="text-4xl font-bold text-headingsColor/85 max-1100:text-[33px] max-lg:text-[32px] max-900:w-full max-sm:text-[26px] [@media(max-width:480px)]:text-[25px]"
+        >
+          هروز یک قدم بیشتر!
         </p>
-        <p class="text-[18px] text-gray-600 text-right leading-8">
+        <p
+          class="text-[17.3px] text-gray-600 text-right leading-8 lg:max-xl:text-[16px] max-xl:leading-7 900:max-lg:text-[15px] max-[480px]:text-[15px] max-900:text-[16px] max-sm:leading-6.5 max-[480px]:text-justify"
+        >
           با
-          <span class="twTextGradient font-bold text-[21px]">Steppy</span>
+          <span
+            class="twTextGradient font-bold text-[20px] max-[480px]:text-[18px]"
+            >Steppy</span
+          >
           تمرین‌ هات رو هر جا که هستی شروع کن بدون نیاز به باشگاه، بدون تجهیزات
           خاص.<br />
-          فقط خودت، اراده‌ت و یه برنامه حرفه‌ای.<br />همراه با مربی اختصاصی که
+          فقط خودت، اراده‌ت و یه برنامه حرفه‌ای. <br />همراه با مربی اختصاصی که
           قدم‌ به‌ قدم کنارت می‌مونه.<br />
           وقتشه که خونه‌تو به بهترین باشگاه دنیا تبدیل کنی!
         </p>
-        <button id="letsGoBtn" class="mt-8 w-1/3 h-12">
+        <button
+          id="letsGoBtn"
+          class="mt-0 w-fit h-12 max-sm:mt-1 max-sm:h-11"
+        >
           بزن بریم
           <div class="hoverEffect">
             <div></div>
@@ -36,17 +48,21 @@
   </section>
   <section
     id="websiteFeatures"
-    class="w-full h-fit flex flex-row justify-center items-center"
+    class="w-full h-fit flex justify-center items-center max-sm:mt-6"
   >
-    <div class="w-10/12 h-full rounded-4xl flex flex-col items-center">
-      <div class="w-1/4 h-full twFlexCentering flex-col text-gray-600 mb-4">
-        <p class="text-[28px] font-bold text-headingsColor/85">
+    <div
+      class="w-10/12 h-full rounded-4xl flex flex-col items-center max-[1150px]:w-full [@media(min-width:1150px)]:max-xl:w-11/12"
+    >
+      <div
+        class="w-1/4 h-full twFlexCentering flex-col mb-5 max-xl:mb-3 max-[930px]:w-2/4 max-sm:mb-2 max-[480px]:w-full"
+      >
+        <p class="homeSectionTitle">
           حالا چرا
           <span class="twTextGradient font-bold">Steppy</span> ؟
         </p>
       </div>
       <div
-        class="w-3/4 h-fit bg-blue-50/80 grid grid-cols-4 grid-rows-1 rounded-4xl"
+        class="w-3/4 h-fit bg-blue-50/80 grid grid-cols-4 grid-rows-1 rounded-4xl max-[480px]:pb-5 max-[480px]:pt-3 max-[480px]:gap-y-2.5 [@media(max-width:480px)]:grid-cols-1 [@media(max-width:480px)]:grid-rows-[repeat(4,auto)] [@media(min-width:480px)]:[@media(max-width:580px)]:w-10/12 max-sm:grid-cols-2 max-sm:grid-rows-2 [@media(min-width:580px)]:max-sm:w-8/12 sm:max-900:w-full 900:max-[1000px]:w-11/12 [@media(min-width:1000px)]:[@media(max-width:1060px)]:w-4/5"
       >
         <mat-card>
           <div>
@@ -92,33 +108,37 @@
   <section
     id="plansSection"
     #fitnessPlansSection
-    class="w-full h-fit mt-30 mb-20 flex flex-row gap-5 justify-center items-center"
+    class="w-full h-fit mt-30 mb-20 flex flex-row gap-5 justify-center items-center max-[1500px]:gap-0 max-900:mt-20 max-[1050px]:mt-25 max-[1050px]:mb-5"
   >
     <div
-      class="w-7/12 h-fit flex flex-col justify-between items-center"
+      class="w-7/12 h-fit flex flex-col justify-between items-center max-xl:w-8/12 max-[1050px]:pr-0 [1050px]:max-xl:pr-10 [@media(max-width:900px)]:w-full 900:[@media(max-width:1100px)]:w-12/12 [1050px]:[@media(max-width:1160px)]:w-9/12"
       [ngClass]="plansSectionObserved ? 'flex' : 'hidden'"
     >
       <div
-        class="w-full h-full flex flex-col justify-between text-gray-700 animate-fadeInLeft opacity-0 gap-y-2"
+        class="w-full h-full flex flex-col justify-between animate-fadeInLeft opacity-0"
       >
-        <p class="text-[28px] font-bold text-headingsColor/85">
+        <p
+          class="homeSectionTitle pb-2"
+        >
           برنامه تمرینی، متناسب با هر هدف
         </p>
-        <p class="text-[15px] leading-7">
+        <p
+          class="homeSectionText"
+        >
           با انتخاب برنامه های جامع میتونی با خیال راحت مسیر تناسب اندامتو شروع
           کنی و دیگه نگران جزئیات نباشی چون فکر همه جاشو کردیم.
         </p>
         <div
           id="cards"
-          class="w-full grid grid-cols-3 grid-rows-[340px] gap-x-5"
+          class="w-full grid grid-cols-3 grid-rows-[340px] gap-x-5 max-md:px-1.5 max-sm:px-0 max-md:gap-x-4 max-[740px]:grid-cols-1 max-[740px]:grid-rows-[repeat(3,auto)] max-[740px]:gap-y-4"
         >
-          <mat-card>
+          <mat-card id="muscle-building-plan">
             <img
-              class="absolute w-[250px] -top-[5%] -left-[25%] opacity-35 -z-10"
+              class="absolute w-[250px] -top-[5%] -left-[25%] opacity-7 z-1"
               src="../../assets/vectors/dumbell.png"
               alt=""
             />
-            <mat-card-header>
+            <mat-card-header class="z-10">
               <mat-card-title class="text-red-800/70"
                 >مسیر عضله سازی</mat-card-title
               >
@@ -126,7 +146,7 @@
                 >تمرینات متنوع و حرفه ای عضله سازی</mat-card-subtitle
               >
             </mat-card-header>
-            <mat-card-content>
+            <mat-card-content class="z-10">
               <ul>
                 <li>برنامه تمرینی با هدف عضله سازی</li>
                 <li>آموزش حرکات با تصویر و توضیح</li>
@@ -138,13 +158,13 @@
               <mat-icon>arrow_outward</mat-icon>
             </button>
           </mat-card>
-          <mat-card>
+          <mat-card id="weight-control-plan">
             <img
-              class="absolute rotate-40 w-[250px] -top-[5%] -left-[25%] opacity-35 -z-10"
-              src="../../assets/vectors/scales.png"
+              class="absolute rotate-40 w-[250px] -top-[5%] -left-[25%] opacity-7 z-1"
+              src="../../assets/vectors/aim.png"
               alt=""
             />
-            <mat-card-header>
+            <mat-card-header class="z-10">
               <mat-card-title class="text-green-800/80"
                 >کنترل وزن</mat-card-title
               >
@@ -152,39 +172,36 @@
                 >رژیم های تخصصی برای تغییر وزن</mat-card-subtitle
               >
             </mat-card-header>
-            <mat-card-content>
+            <mat-card-content class="z-10">
               <ul>
                 <li>تنظیم رژیم غذایی متناسب با هدف</li>
                 <li>برنامه وعده های روزانه متنوع</li>
                 <li>نکات تغذیه ای برای زندگی سالم</li>
                 <li>دستورهای غذایی رژیمی</li>
-                <li>دسترسی به نرم افزار کنترل وزن</li>
               </ul>
             </mat-card-content>
             <button mat-icon-button>
               <mat-icon>arrow_outward</mat-icon>
             </button>
           </mat-card>
-          <mat-card>
+          <mat-card id="general-plan">
             <img
-              class="absolute rotate-40 w-[250px] -top-[5%] -left-[25%] opacity-35 -z-10"
+              class="absolute rotate-40 w-[250px] -top-[5%] -left-[25%] opacity-7 z-1"
               src="../../assets/vectors/gym.png"
               alt=""
             />
-            <mat-card-header>
+            <mat-card-header class="z-10">
               <mat-card-title class="text-cyan-800/90"
                 >برنامه جامع تناسب</mat-card-title
               >
               <mat-card-subtitle>عضله سازی + رژیم غذایی</mat-card-subtitle>
             </mat-card-header>
-            <mat-card-content>
+            <mat-card-content class="z-10">
               <ul>
                 <li>برنامه تمرینی و غذایی هماهنگ</li>
                 <li>هدف گذاری دقیق برای فرم دهی</li>
                 <li>پشتیبانی و مشاوره در طول مسیر</li>
-                <li>ابزارهای پیگیری و تحلیل تغییرات</li>
                 <li>بهینه سازی برنامه به مرور</li>
-                <li>دسترسی به نرم افزار کنترل وزن</li>
               </ul>
             </mat-card-content>
             <button mat-icon-button>
@@ -193,14 +210,14 @@
           </mat-card>
         </div>
         <button
-          class="twBackgroundGradient animate-bounce text-white shadow-lg shadow-gray-400 hover:shadow-md cursor-pointer transition w-38 h-12 py-3 mt-8 rounded-xl text-[16px]"
+          class="twBackgroundGradient animate-bounce text-white shadow-lg shadow-gray-400 hover:shadow-md cursor-pointer transition w-38 h-12 py-3 mt-8 rounded-xl text-[16px] max-sm:h-11 max-sm:mt-6"
         >
           مشاهده برنامه ها
         </button>
       </div>
     </div>
     <div
-      class="w-5/12 h-full"
+      class="w-5/12 h-full max-[1500px]:w-4/12 max-[1160px]:w-3/12 max-[1100px]:hidden"
       [ngClass]="plansSectionObserved ? 'flex' : 'hidden'"
     >
       <img
@@ -213,11 +230,11 @@
   <section
     id="exercisesSection"
     #exerciseSection
-    class="w-full h-fit flex flex-row gap-5 justify-center items-center"
+    class="w-full h-fit flex flex-row gap-5 justify-center items-center max-900:flex-col max-sm:gap-0"
   >
     <div
       [ngClass]="exerciseSectionObserved ? 'flex' : 'hidden'"
-      class="w-5/12 h-full flex justify-center items-center"
+      class="w-5/12 h-full flex justify-center items-center max-[1160px]:w-4/12 max-900:w-7/12 max-md:w-8/12 max-sm:mb-5 max-sm:w-9/12 [@media(max-with:480px)]:w-full"
     >
       <img
         class="w-full object-contain opacity-0 animate-fadeInLeft"
@@ -227,14 +244,16 @@
     </div>
     <div
       [ngClass]="exerciseSectionObserved ? 'flex' : 'hidden'"
-      class="w-6/12 h-full flex flex-col animate-fadeInRight justify-between items-center text-gray-700"
+      class="w-6/12 h-full flex flex-col animate-fadeInRight justify-between items-center [@media(max-width:1100px)]:w-8/12 max-xl:w-7/12 [@media(max-width:900px)]:w-full"
     >
       <p
-        class="text-[28px] text-right w-full font-bold text-headingsColor/85 pb-2"
+        class="w-full pb-2 homeSectionTitle"
       >
         تمرین خودتو بساز!
       </p>
-      <p class="text-[16px] leading-8">
+      <p
+        class="homeSectionText"
+      >
         از بین تمرینات متنوع که بصورت تصویری و کاملا استاندارد آموزش داده شدن با
         شدت های مختلف میتونی تمرین خودتو بسازی و تو بخش تمرین های من پیشرفتت رو
         تو اون تمرین ببینی.
@@ -253,21 +272,25 @@
                 alt=""
               />
               <mat-card-content>
-                <mat-card-title>{{ exercise["exerciseName"] }}</mat-card-title>
-                <mat-card-subtitle
-                  [ngClass]="{
-                    hard: exercise['type'] === 'قدرتی',
-                    normal: exercise['type'] === 'ایزومتریک',
-                    easy: exercise['type'] === 'هوازی'
-                  }"
-                  >نوع تمرین : <span>{{ exercise["type"] }}</span>
-                </mat-card-subtitle>
+                <div class="w-full flex flex-row justify-between items-center">
+                  <mat-card-title>{{
+                    exercise["exerciseName"]
+                  }}</mat-card-title>
+                  <mat-card-subtitle
+                    [ngClass]="{
+                      hard: exercise['type'] === 'قدرتی',
+                      normal: exercise['type'] === 'ایزومتریک',
+                      easy: exercise['type'] === 'هوازی'
+                    }"
+                    ><span>{{ exercise["type"] }}</span>
+                  </mat-card-subtitle>
+                </div>
                 <ul>
                   <li>
                     <span> تعداد تکرار:</span>
                     <span class="mr-auto"
                       >{{ exercise["sets"] }} ست
-                      {{ exercise["reps"] }} تایی</span
+                      {{ exercise["reps"] }} تکرار</span
                     >
                   </li>
                   <li>
@@ -285,7 +308,11 @@
                     ><span class="mr-auto">{{ exercise["weakness"] }}</span>
                   </li>
                 </ul>
-                <button class="twBackgroundGradient" routerLink="/training" mat-icon-button>
+                <button
+                  class="twBackgroundGradient"
+                  routerLink="/training"
+                  mat-icon-button
+                >
                   <mat-icon>add</mat-icon>
                 </button>
               </mat-card-content>

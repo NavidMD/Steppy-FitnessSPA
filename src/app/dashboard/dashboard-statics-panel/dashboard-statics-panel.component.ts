@@ -18,9 +18,9 @@ export class DashboardStaticsPanelComponent implements OnInit {
 
   // training types pie chart data source
   completedTrainingsTypes: { name: string; value: number }[] = [
-    { name: 'قدرتی', value: 0 },
-    { name: 'ایزومتریک', value: 0 },
-    { name: 'هوازی', value: 0 },
+    { name: 'قدرتی', value: 2 },
+    { name: 'ایزومتریک', value: 5 },
+    { name: 'هوازی', value: 3 },
   ];
 
   // weekly done trainings bar chart data source
