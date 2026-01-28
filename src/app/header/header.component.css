@@ -21,7 +21,6 @@ ul li:hover {
 
 #welcome-btn,
 #logout-btn {
-  width: fit-content;
   height: 44px;
   display: flex;
   justify-content: space-between;
@@ -30,11 +29,13 @@ ul li:hover {
 }
 #logout-btn {
   opacity: 0;
+  width: fit-content;
   animation: slideLeft 0.7s forwards 4s ease;
 }
 #welcome-btn span {
   overflow: hidden;
-  width: 0;
+  max-width: 0;
+  padding: 0;
   animation: fadeOutText 4s forwards 0.5s ease;
 }
 @keyframes slideLeft {
@@ -55,22 +56,27 @@ ul li:hover {
 @keyframes fadeOutText {
   0% {
     display: none;
-    width: 0;
-    opacity: 0;
-  }
-  10% {
-    display: block;
+    max-width: 0;
     opacity: 1;
-    width: 130px;
+    padding: 0 3px;
+  }
+  40% {
+    opacity: 1;
+    display: block;
+    max-width: 300px;
+    padding: 0 3px;
   }
   90% {
-    display: block;
     opacity: 1;
-    width: 130px;
+    display: block;
+    max-width: 300px;
+    padding: 0 3px;
   }
   100% {
-    display: none;
     opacity: 0;
+    max-width: 0;
+    display: none;
+    padding: 0;
   }
 }
 
@@ -91,5 +97,8 @@ ul li:hover {
 @media (max-width: 640px) {
   mat-toolbar {
     height: 100px;
+  }
+  #welcome-btn span {
+    font-size: 13px;
   }
 }

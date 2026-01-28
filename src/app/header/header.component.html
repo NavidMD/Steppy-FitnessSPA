@@ -1,10 +1,16 @@
 <mat-toolbar>
-  <div class="w-full flex justify-start items-center gap-x-7 max-lg:gap-x-4 max-md:gap-x-2.5">
+  <div class="w-full flex justify-start items-center gap-x-7 max-lg:gap-x-4 max-md:gap-x-2.5 max-sm:gap-x-1.5">
     <button
       (click)="onMenuBtnClick()"
       class="twFlexCentering p-2.5 max-lg:p-2 twBackgroundGradient twGradientButton rounded-xl"
     >
       <mat-icon>menu_open</mat-icon>
+    </button>
+    <button
+      (click)="onMenuBtnClick()"
+      class="hidden twFlexCentering p-2.5 max-lg:p-2 twBackgroundGradient twGradientButton rounded-xl max-sm:flex"
+    >
+      <mat-icon>home</mat-icon>
     </button>
     <button routerLink="/" class="cursor-pointer text-[22px] font-bold ml-4 max-sm:hidden">
       <span class="twTextGradient font-bold text-[32px] max-md:text-[26px] font-sans"
@@ -44,7 +50,7 @@
       routerLink="/dashboard"
       class="text-[15px] max-lg:text-sm twBackgroundGradient twGradientButton p-2.5 max-lg:p-2 rounded-xl"
     >
-      <span class="overflow-hidden inline">خوش اومدی {{userFirstName}} :)</span>
+      <span class="overflow-hidden inline">خوش اومدی :)</span>
       <mat-icon>person</mat-icon>
     </button>
   </div>
