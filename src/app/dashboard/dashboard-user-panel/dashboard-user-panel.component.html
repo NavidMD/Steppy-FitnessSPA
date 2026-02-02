@@ -1,4 +1,4 @@
-<mat-card class="w-full h-full block py-6 px-5">
+<mat-card class="w-full h-full block py-6 pb-5 px-5 max-[1100px]:p-4">
   <div id="avatar" class="w-full h-fit flex justify-center items-center py-3">
     <img
       class="object-contain w-38 h-38 rounded-full p-0.5 opacity-95"
@@ -19,7 +19,7 @@
       id="profile-name"
       class="w-full h-fit flex flex-col justify-center items-center py-1 pb-5"
     >
-      <p class="font-bold text-xl pb-2 text-headingsColor/80">
+      <p class="font-bold text-xl pb-2 text-headingsColor/80 max-lg:text-[18px]">
         {{ (userInfo$ | async)?.firstName }} {{ (userInfo$ | async)?.lastName }}
       </p>
       <p class="text-sm text-btnSecondColor">عضویت دائم</p>
@@ -28,16 +28,16 @@
       id="user-info"
       class="w-full h-20 rounded-2xl bg-steppylightBlue/30 grid grid-cols-3 grid-rows-2 place-items-center py-2.5 px-2"
     >
-      <p class="text-black/60 text-[13px]">قد(cm)</p>
-      <p class="text-black/60 text-[13px]">سن</p>
-      <p class="text-black/60 text-[13px]">وزن(kg)</p>
-      <p class="text-headingsColor/80 font-sans font-semibold text-xl">
+      <p class="text-black/60 text-[13px] max-[1100px]:text-[12px]">قد(cm)</p>
+      <p class="text-black/60 text-[13px] max-[1100px]:text-[12px]">سن</p>
+      <p class="text-black/60 text-[13px] max-[1100px]:text-[12px]">وزن(kg)</p>
+      <p class="text-headingsColor/80 font-sans font-semibold text-xl max-[1100px]:text-[18px]">
         {{ (userInfo$ | async)?.height }}
       </p>
-      <p class="text-headingsColor/80 font-sans font-semibold text-xl">
+      <p class="text-headingsColor/80 font-sans font-semibold text-xl max-[1100px]:text-[18px]">
         {{ (userInfo$ | async)?.age }}
       </p>
-      <p class="text-headingsColor/80 font-sans font-semibold text-xl">
+      <p class="text-headingsColor/80 font-sans font-semibold text-xl max-[1100px]:text-[18px]">
         {{ (userInfo$ | async)?.weight }}
       </p>
     </div>

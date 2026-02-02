@@ -4,6 +4,7 @@ svg {
   opacity: 35%;
   position: absolute;
   bottom: 0;
+  left: 0;
 }
 use {
   animation: move-forever 8s linear infinite;
@@ -26,18 +27,21 @@ use {
 }
 
 ::ng-deep .ngx-charts .bar {
-  fill: #bde2ff;
+  fill: #c6e6ff;
 }
 ::ng-deep .ngx-charts .x.axis text {
-  font-size: 14px;
-  fill: #320a6b;
+  font-size: 13px;
+  fill: #320a6bc7;
   transform: translateY(0px);
 }
-
 ::ng-deep ngx-charts-bar-vertical {
   height: 90%;
   width: 100%;
   display: block;
+}
+
+::ng-deep g.bar-chart.chart {
+  transform: translate(20px, 10px) !important;
 }
 
 #type-aerobic,
@@ -73,9 +77,9 @@ use {
   padding: 4px 0;
   position: relative;
   width: 100%;
-  height: fit-content;
+  height: 60px;
   display: grid;
-  grid-template-columns: 1fr 2fr repeat(3, 1fr) 1fr;
+  grid-template-columns: 1.5fr 1.5fr repeat(3, 1fr) 1fr;
   grid-template-rows: 100%;
   justify-items: center;
   align-items: center;
@@ -113,9 +117,21 @@ use {
 }
 
 /* Media Queries */
+
 @media (max-width: 1150px) {
   svg {
     width: 150%;
+  }
+}
+@media (max-width: 1100px) {
+  #new-trainings .exercise {
+    grid-template-columns: 1.5fr 1fr repeat(3, 1fr) 0.5fr;
+    column-gap: 5px;
+  }
+}
+@media (max-width: 960px) {
+  ::ng-deep .ngx-charts .x.axis text {
+    font-size: 12px;
   }
 }
 @media (max-width: 900px) {
@@ -129,8 +145,17 @@ use {
   svg {
     width: 150%;
   }
+  ::ng-deep g.bar-chart.chart {
+    transform: translate(0px, 20px) !important;
+  }
 }
-@media (max-width: 480px) {
+@media (max-width: 640px) {
+  ::ng-deep g.bar-chart.chart {
+    transform: translate(0px, 10px) !important;
+  }
+}
+
+@media (max-width: 479px) {
   svg {
     width: 130%;
   }
@@ -139,5 +164,14 @@ use {
   #type-strength {
     font-size: 13px;
     justify-content: center;
+  }
+  #new-trainings .exercise {
+    grid-template-columns: 1.5fr repeat(2, 1fr) 1fr;
+    column-gap: 5px;
+  }
+}
+@media (max-width: 400px) {
+  ::ng-deep .ngx-charts .x.axis text {
+    font-size: 10px;
   }
 }

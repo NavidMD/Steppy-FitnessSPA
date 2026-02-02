@@ -4,14 +4,19 @@ h2[mat-dialog-title] {
   font-weight: bold;
   color:  #065084;
 }
-
+::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
+  min-width: 90% !important;
+  max-width: 300px !important;
+  border-radius: 16px !important;
+}
 mat-dialog-content p {
   font-size: 14px;
 }
 mat-dialog-actions {
-  width: 320px;
+  width: 100%;
   padding: 20px;
   display: flex;
+  gap: 10px;
   flex-direction: row;
   justify-content: space-between;
 }
@@ -19,7 +24,7 @@ mat-dialog-actions button {
   width: 100px;
   padding: 10px;
   color: white;
-  border-radius: 6px;
+  border-radius: 12px;
   cursor: pointer;
 }
 #countdown {

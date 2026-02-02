@@ -44,7 +44,7 @@ export class DashboardStaticsPanelComponent implements OnInit {
   animations: boolean = true;
   showGridLines: boolean = false;
   showDataLabel: boolean = false;
-  barPadding: number = 75;
+  barPadding: number = 30;
   tooltipDisabled: boolean = false;
   roundEdges: boolean = true;
 

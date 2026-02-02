@@ -1,6 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { CompletedTrainingInfo, NewTrainingInfo, TrainingInfo } from '../shared/types';
+import {
+  CompletedTrainingInfo,
+  NewTrainingInfo,
+  TrainingInfo,
+} from '../shared/types';
 import { MatStepper } from '@angular/material/stepper';
 import { MatDialog } from '@angular/material/dialog';
 import { StartModalComponent } from './start-modal/start-modal.component';
@@ -21,7 +25,7 @@ export class ActiveTrainingComponent implements OnInit {
     private route: ActivatedRoute,
     private dialog: MatDialog,
     private trainingService: GetTrainingsService,
-    private authService: AuthService
+    private authService: AuthService,
   ) {}
 
   //active exercise data
@@ -56,7 +60,7 @@ export class ActiveTrainingComponent implements OnInit {
         this.stop();
         this.reset();
         this.stepper.selected!.completed = true;
-        this.addAsCompleted();
+        this.goNextStep()
       }
     }, 1000);
   }
@@ -73,6 +77,14 @@ export class ActiveTrainingComponent implements OnInit {
     this.progressValue = 100;
   }
 
+  goNextStep() {
+    if (this.stepper.selectedIndex === this.sets.length - 1) {
+      this.lastSetCompleted = true;
+    } else {
+      this.stepper.selectedIndex++;
+    }
+  }
+
   addAsCompleted() {
     if (this.stepper.selectedIndex === this.sets.length - 1) {
       let completedExercise: CompletedTrainingInfo = {
@@ -82,8 +94,8 @@ export class ActiveTrainingComponent implements OnInit {
         reps: this.reps,
         id: this.exerciseId,
         type: this.type,
-        caloriesBurned: (this.caloriePerSet * this.sets.length),
-        totalSeconds: (this.reps * this.secondPerRep) * this.sets.length
+        caloriesBurned: this.caloriePerSet * this.sets.length,
+        totalSeconds: this.reps * this.secondPerRep * this.sets.length,
       };
       this.lastSetCompleted = true;
       this.trainingService.addToCompletedTrainingsDb(completedExercise);
@@ -115,7 +127,7 @@ export class ActiveTrainingComponent implements OnInit {
 
   //spinner buttons handlers
   deleteActiveExercise() {
-    if(this.exerciseId) {
+    if (this.exerciseId) {
       this.trainingService.deleteNewTraining(this.exerciseId);
     }
     this.router.navigate(['/training']);
@@ -129,19 +141,23 @@ export class ActiveTrainingComponent implements OnInit {
 
     this.authService.userIdSubject.subscribe({
       next: (data) => {
-        const active = data.newTrainings.find((i:NewTrainingInfo) => i.id === this.exerciseId);
+        const active = data.newTrainings.find(
+          (i: NewTrainingInfo) => i.id === this.exerciseId,
+        );
         if (active) {
           this.name = active.name;
           this.reps = active.reps;
           this.type = active.type;
           this.secondPerRep = active.secondPerRep;
           this.caloriePerSet = active.caloriePerSet;
-          this.timeRequired = active.secondPerRep * active.reps
+          this.timeRequired = active.secondPerRep * active.reps;
           for (let i = 1; i <= active.sets; i++) {
             this.sets.push(i);
           }
         }
-        this.activeExerciseModel$ = this.trainingService.getExerciseByName(this.name);
+        this.activeExerciseModel$ = this.trainingService.getExerciseByName(
+          this.name,
+        );
       },
     });
   }

@@ -5,8 +5,7 @@
   <p id="countdown" class="animate-fadeInCenter">{{started? 'شروع...': mainCountDown}}</p>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button class="bg-btnSecondColor shadow-md shadow-black/30"
-          [ngClass]="started? 'animate-scaleXWiderToLeft text-[16px]':'text-[14px]'"
+  <button class="bg-btnSecondColor shadow-md shadow-black/30 text-[14px]"
           matButton (click)="closeDialog('start')">
           <span *ngIf="started">{{mainCountDown}} | </span>شروع
   </button>
