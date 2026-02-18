@@ -85,7 +85,7 @@ use {
   align-items: center;
   column-gap: 15px;
 }
-#graph p::before {
+#graph p.header::before {
   content: "";
   display: inline-block;
   width: 18px;

@@ -136,7 +136,7 @@
       class="w-4/6 pt-4 px-6 pb-12 h-full bg-white rounded-2xl twCustomSoftShadow max-[1150px]:px-5 max-900:w-full max-900:pb-4"
     >
       <p
-        class="mb-6 w-full flex justify-right pt-1 text-headingsColor/90 text-sm font-bold max-[480px]:text-[13px]"
+        class="header mb-6 w-full flex justify-right pt-1 text-headingsColor/90 text-sm font-bold max-[480px]:text-[13px]"
       >
         میزان فعالیت<span class="inline-block mr-auto"> 7 روز گذشته</span>
       </p>
@@ -145,8 +145,16 @@
           message="درحال بارگذاری اطلاعات"
           *ngIf="spinnerOn"
         ></app-http-loading>
+        <p
+          class="text-center py-8 pt-10 text-gray-500 text-[15px]"
+          *ngIf="
+            (this.authService.userIdSubject | async) && !trainingsDoneLast7Days
+          "
+        >
+          تمرینی این هفته انجام نداده اید!
+        </p>
         <ngx-charts-bar-vertical
-          *ngIf="!spinnerOn && completedTrainingLast7Days"
+          *ngIf="!spinnerOn && trainingsDoneLast7Days"
           [results]="completedTrainingLast7Days"
           [legend]="false"
           [showXAxisLabel]="showXAxisLabel"
@@ -235,7 +243,7 @@
     </section>
     <section
       id="new-trainings"
-      class="w-full flex flex-col bg-white rounded-2xl twCustomSoftShadow py-4 pb-3 px-6 max-[1150px]:px-5"
+      class="w-full flex flex-col items-center bg-white rounded-2xl twCustomSoftShadow pt-4 pb-5 px-6 max-[1150px]:px-5"
     >
       <p
         id="title"
@@ -290,18 +298,25 @@
             </button>
           </ng-container>
         </div>
-        <button
-          routerLink="/training"
-          class="w-fit h-fit mt-auto mr-auto mb-2 p-2 px-3 gap-1 twCustomSoftShadow rounded-xl bg-btnSecondColor flex justify-center items-center text-white text-[13px]"
-        >
-          <img class="w-3 h-3" src="../../../assets/vectors/plus.svg" />
-          ایجاد تمرین جدید
-        </button>
       </ng-container>
+      <p
+        class="text-center pt-8 pb-10 text-gray-500 text-[15px]"
+        *ngIf="(this.authService.userIdSubject | async) && !newTrainings.length"
+      >
+        تمرین جدیدی وجود ندارد!
+      </p>
       <app-http-loading
         message="درحال بارگذاری اطلاعات"
-        *ngIf="!newTrainings.length"
+        *ngIf="!(this.authService.userIdSubject | async)"
+        class="mb-5"
       ></app-http-loading>
+      <button
+        routerLink="/training"
+        class="w-fit h-fit mt-auto mr-auto cursor-pointer max-[480px]:mr-0 mb-0 p-2 px-3 gap-1 twCustomSoftShadow rounded-xl bg-btnSecondColor flex justify-center items-center text-white text-[13px]"
+      >
+        <img class="w-3 h-3" src="../../../assets/vectors/plus.svg" />
+        ایجاد تمرین جدید
+      </button>
     </section>
   </div>
 </div>

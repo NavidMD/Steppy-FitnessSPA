@@ -8,12 +8,13 @@ import { Color, ScaleType } from '@swimlane/ngx-charts';
   styleUrl: './dashboard-statics-panel.component.css',
 })
 export class DashboardStaticsPanelComponent implements OnInit {
-  constructor(private authService: AuthService) {}
+  constructor(public authService: AuthService) {}
 
   spinnerOn: boolean = true;
   totalExerciseTimeSpent: number = 0;
   totalCaloriesBurned: number = 0;
   totalTrainingsDone: number = 0;
+  trainingsDoneLast7Days: boolean = false;
   newTrainings: any[] = [];
 
   // training types pie chart data source
@@ -77,7 +78,7 @@ export class DashboardStaticsPanelComponent implements OnInit {
     this.getLast7Days();
     this.authService.userIdSubject.subscribe((user) => {
       if (user) {
-        console.log(user);
+        // console.log(user);
         this.newTrainings = [...user.newTrainings.reverse()];
         if(this.newTrainings.length > 3) {
           this.newTrainings.length = 3;
@@ -105,6 +106,7 @@ export class DashboardStaticsPanelComponent implements OnInit {
             month: 'long',
           });
         }
+        this.trainingsDoneLast7Days = !this.completedTrainingLast7Days.every((item) => item.value === 0)
         this.completedTrainingsTypes = [...this.completedTrainingsTypes];
         this.completedTrainingLast7Days = [...this.completedTrainingLast7Days];
         this.spinnerOn = false;
